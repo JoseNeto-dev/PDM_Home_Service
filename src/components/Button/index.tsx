@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Button, ViewStyle, TextStyle } from 'react-native';
+import { View, Button, ViewStyle, TextStyle, Touchable, TouchableOpacity, Text } from 'react-native';
 import { styles } from '../../screens/home/styles';
 
 interface CustomButtonProps {
@@ -9,10 +9,12 @@ interface CustomButtonProps {
     titleStyle?: TextStyle;
 }
 
-export function CustomButton({ title, onPress, containerStyle, titleStyle}: CustomButtonProps) {
-  return (
-    <View style= {containerStyle}>
-      <Button title={title} onPress={onPress} titleStyle= {titleStyle}/>
-    </View>
-  );
+export function CustomButton({ title, onPress, containerStyle, titleStyle }: CustomButtonProps) {
+    return (
+        <View style={containerStyle}>
+            <TouchableOpacity onPress={onPress}>
+                <Text style={titleStyle}>{title}</Text>
+            </TouchableOpacity>
+        </View>
+    );
 }

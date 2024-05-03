@@ -6,23 +6,55 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingTop: 70,
     backgroundColor: '#eae1fd',
-    height: '100%'
+    height: '100%',
+    alignItems: 'center', // Alinhar itens no centro horizontalmente
+    justifyContent: 'center', // Alinhar itens no centro verticalmente
+  },  
+  containerGroup: {
+    alignItems: 'center', // Alinhar itens no centro horizontalmente
+    justifyContent: 'center', // Alinhar itens no centro verticalmente
+
   },
-  text: {
+  title: {
     color: '#564caf',
-    fontSize: 30,
+    fontSize: 36,
+    marginTop: 20,
+    marginBottom: 40
+
   },
   logo: {
-    width: 100,
-    height: 100
+    width: 140,
+    height: 140,  
   },
-  buttonContainer: {
-    borderRadius: 10,
+  buttonContainerType1: {
+    borderRadius: 30,
     overflow: 'hidden',
-    backgroundColor: 'white',
+    backgroundColor: '#564CAF',
+    margin: 10,
+    width: 300,
+    height: 60,
+    alignItems: 'center', // Alinhar itens no centro horizontalmente
+    justifyContent: 'center', // Alinhar itens no centro verticalmente
   },
-  buttonTitle: {
+  buttonTitleType1: {
     fontSize: 20,
-    color: 'red'
+    color: 'white'
+  },
+  buttonContainerType2: {
+    borderRadius: 30,
+    overflow: 'hidden',
+    backgroundColor: '#ffff',
+    margin: 10,
+    width: 300,
+    height: 60,
+    alignItems: 'center', // Alinhar itens no centro horizontalmente
+    justifyContent: 'center', // Alinhar itens no centro verticalmente
+    borderColor: '#564CAF',
+    borderWidth: 0.5
+  },
+  buttonTitleType2: {
+    fontSize: 20,
+    color: '#564CAF',
+    fontWeight: 'bold'
   }
 });
