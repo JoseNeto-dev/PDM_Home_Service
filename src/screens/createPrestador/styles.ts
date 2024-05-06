@@ -15,21 +15,21 @@ export const styles = StyleSheet.create({
     justifyContent: 'center', // Alinhar itens no centro verticalmente
 
   },
-  title: {
+  text: {
     color: '#564caf',
-    fontSize: 36,
-    marginTop: 20,
-    marginBottom: 30
-  },
+    fontSize: 20,
+    marginBottom: 25
+},
   logo: {
     width: 140,
     height: 140,  
   },
   buttonContainerType1: {
+    marginTop: 25,
     borderRadius: 30,
     overflow: 'hidden',
     backgroundColor: '#564CAF',
-    marginBottom: 10,
+    margin: 10,
     width: 300,
     height: 60,
     alignItems: 'center', // Alinhar itens no centro horizontalmente
@@ -39,21 +39,15 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     color: 'white'
   },
-  buttonContainerType2: {
-    borderRadius: 30,
-    overflow: 'hidden',
-    backgroundColor: '#ffff',
-    margin: 10,
-    width: 300,
-    height: 60,
-    alignItems: 'center', // Alinhar itens no centro horizontalmente
-    justifyContent: 'center', // Alinhar itens no centro verticalmente
-    borderColor: '#564CAF',
-    borderWidth: 0.5
-  },
-  buttonTitleType2: {
-    fontSize: 20,
-    color: '#564CAF',
-    fontWeight: 'bold'
+  input:{
+    height:56,
+    width: 350,
+    backgroundColor:'#fff',
+    fontSize:20,
+    marginBottom: 10,
+    paddingLeft: 28,
+    borderRadius:15,
+    borderWidth: 0.5,
+    borderColor: "#9089CB"
   }
 });

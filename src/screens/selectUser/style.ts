@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center', // Alinhar itens no centro horizontalmente
         justifyContent: 'center', // Alinhar itens no centro verticalmente
     },
-    title: {
+    text: {
         color: '#564caf',
         fontSize: 20,
         marginBottom: 25

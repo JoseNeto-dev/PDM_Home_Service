@@ -11,7 +11,7 @@ export function SelectUser() {
     return (
         <View style={styles.container}>
             <View style={styles.containerGroup}>
-                <Text style={styles.title}> Tipo de usuário</Text>
+                <Text style={styles.text}> Tipo de usuário</Text>
                 <CustomButton
                     title="Prestador de serviço"
                     onPress={handlePress}
