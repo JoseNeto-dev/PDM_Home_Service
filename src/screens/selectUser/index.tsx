@@ -10,7 +10,7 @@ export function SelectUser() {
 
     return (
         <View style={styles.container}>
-            <View style={styles.containerGroup}>
+            <View style={styles.align}>
                 <Text style={styles.text}> Tipo de usuário</Text>
                 <CustomButton
                     title="Prestador de serviço"

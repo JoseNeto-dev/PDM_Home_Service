@@ -1,4 +1,5 @@
 import { View, Text, Image, TextInput, Alert, TouchableOpacity } from 'react-native';
+import { useState } from 'react';
 import { styles } from './styles';
 import { CustomButton } from '../../components/Button';
 import { Ionicons } from '@expo/vector-icons';
@@ -8,6 +9,13 @@ export function Login() {
     const handlePress = () => {
         Alert.alert('Left button pressed');
     };
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [hide, setHide] = useState(true);
+
+    { console.log(email) }
+    { console.log(hide) }
 
     return (
         <View style={styles.container}>
@@ -28,20 +36,26 @@ export function Login() {
                         style={styles.input}
                         placeholder='Email'
                         placeholderTextColor='#9089CB'
-                    // onChangeText={text => setNameParticipant(text)}
-                    // value={nameParticipant}
+                        onChangeText={(text) => setEmail(text)}
+                        value={email}
                     />
                     <View style={styles.security}>
                         <TextInput
                             style={styles.inputSecurity}
                             placeholder='Senha'
                             placeholderTextColor='#9089CB'
-                            secureTextEntry={true}
-                        // onChangeText={text => setNameParticipant(text)}
-                        // value={nameParticipant}
+                            secureTextEntry={hide}
+                            onChangeText={(text) => setPassword(text)}
+                            value={password}
+
                         />
-                        <TouchableOpacity style={styles.eyeSecurity}>
-                            <Ionicons name='eye' color={"#9089CB"} size={25} />
+                        <TouchableOpacity style={styles.eyeSecurity} onPress={() => setHide(!hide)}>
+                            {hide ?
+                                <Ionicons name='eye' color={"#9089CB"} size={25} />
+
+                            :
+                            <Ionicons name='eye-off' color={"#9089CB"} size={25} />
+                            }
                         </TouchableOpacity>
                     </View>
                 </View>

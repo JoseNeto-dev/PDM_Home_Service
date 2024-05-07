@@ -9,7 +9,7 @@ export function Home() {
 
     return (
         <View style={styles.container}>
-            <View style={styles.containerGroup}>
+            <View style={styles.align}>
                 <Image
                     source={require('../../../assets/logo.png')}
                     style={styles.logo}

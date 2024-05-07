@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center', // Alinhar itens no centro horizontalmente
     justifyContent: 'center', // Alinhar itens no centro verticalmente
   },  
-  containerGroup: {
+  align: {
     alignItems: 'center', // Alinhar itens no centro horizontalmente
     justifyContent: 'center', // Alinhar itens no centro verticalmente
 

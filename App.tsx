@@ -12,7 +12,7 @@ export default function App() {
      {/* <SelectUser/> */}
      {/* <Login/> */}
      {/* <CreatePrestador/> */}
-     {/* <CreateCliente/> */}
+     <CreateCliente/>
 
     </View>
   );
