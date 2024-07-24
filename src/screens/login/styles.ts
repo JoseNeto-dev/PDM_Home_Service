@@ -27,25 +27,11 @@ export const styles = StyleSheet.create({
     width: 140,
     height: 140,  
   },
-  buttonContainerType1: {
-    marginTop: 25,
-    borderRadius: 30,
-    overflow: 'hidden',
-    backgroundColor: '#564CAF',
-    margin: 10,
-    width: 300,
-    height: 60,
-    alignItems: 'center', // Alinhar itens no centro horizontalmente
-    justifyContent: 'center', // Alinhar itens no centro verticalmente
-  },
-  buttonTitleType1: {
-    fontSize: 20,
-    color: 'white'
-  },
   alignInput: {
     alignItems: 'center', // Alinhar itens no centro horizontalmente
     justifyContent: 'center', // Alinhar itens no centro verticalmente
-    width: 350
+    width: 350,
+    marginBottom: 25
   },
   input:{
     height:56,

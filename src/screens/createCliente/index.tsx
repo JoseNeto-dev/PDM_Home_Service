@@ -1,6 +1,6 @@
 import { View, Text, Image, TextInput, Alert } from 'react-native';
 import { styles } from './styles';
-import { CustomButton } from '../../components/Button';
+import { CustomButton } from '../../components/ButtonXM';
 import { useState } from 'react';
 
 export function CreateCliente() {
@@ -61,15 +61,15 @@ export function CreateCliente() {
                     onChangeText={(text) => setAddress(text)}
                     value={address}
                 />
-                <View>
+            </View>
+            <View>
                     <CustomButton
                         title="Cadastrar"
                         onPress={handlePress}
-                        containerStyle={styles.buttonContainerType1}
-                        titleStyle={styles.buttonTitleType1}
+                        color='#564CAF'
+                        textColor='white'
                     />
                 </View>
-            </View>
         </View>
     )
 }

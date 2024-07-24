@@ -19,18 +19,4 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    buttonContainerType3: {
-        borderRadius: 30,
-        overflow: 'hidden',
-        backgroundColor: '#564CAF',
-        margin: 10,
-        width: 300,
-        height: 60,
-        alignItems: 'center', 
-        justifyContent: 'center', 
-    },
-    buttonTitleType3: {
-        color: 'white',
-        fontSize: 20,
-    }
 })

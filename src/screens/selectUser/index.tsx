@@ -1,5 +1,5 @@
 import { View, Text, Image, Button, Alert } from 'react-native';
-import { CustomButton } from '../../components/Button';
+import { CustomButton } from '../../components/ButtonXM';
 import { styles } from './style';
 
 
@@ -15,14 +15,14 @@ export function SelectUser() {
                 <CustomButton
                     title="Prestador de serviço"
                     onPress={handlePress}
-                    containerStyle={styles.buttonContainerType3}
-                    titleStyle={styles.buttonTitleType3}
+                    color='#564CAF'
+                    textColor='white'
                 />
                 <CustomButton
                     title="Cliente"
                     onPress={() => Alert.alert('Left button pressed')}
-                    containerStyle={styles.buttonContainerType3}
-                    titleStyle={styles.buttonTitleType3}
+                    color='#564CAF'
+                    textColor='white'
                 />
             </View>
         </View>

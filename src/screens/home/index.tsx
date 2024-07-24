@@ -1,6 +1,6 @@
 import { View, Text, Image, Button, Alert } from 'react-native';
 import { styles } from './styles';
-import { CustomButton } from '../../components/Button';
+import { CustomButton } from '../../components/ButtonXM';
 
 export function Home() {
     const handlePress = () => {
@@ -18,14 +18,16 @@ export function Home() {
                 <CustomButton
                     title="Entrar"
                     onPress={handlePress}
-                    containerStyle={styles.buttonContainerType1}
-                    titleStyle={styles.buttonTitleType1}
+                    color='#564CAF'
+                    textColor='white'
                 />
                 <CustomButton
                     title="Cadastrar"
                     onPress={() => Alert.alert('Left button pressed')}
-                    containerStyle={styles.buttonContainerType2}
-                    titleStyle={styles.buttonTitleType2}
+                    color='#ffff'
+                    textColor='#564CAF'
+                    borderColor='#564CAF'
+                    borderWidth={0.5}
                 />
             </View>
         </View>

@@ -1,7 +1,7 @@
 import { View, Text, Image, TextInput, Alert, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
 import { styles } from './styles';
-import { CustomButton } from '../../components/Button';
+import { CustomButton } from '../../components/ButtonXM';
 import { Ionicons } from '@expo/vector-icons';
 
 
@@ -62,8 +62,8 @@ export function Login() {
                 <CustomButton
                     title="Entrar"
                     onPress={handlePress}
-                    containerStyle={styles.buttonContainerType1}
-                    titleStyle={styles.buttonTitleType1}
+                    color='#564CAF'
+                    textColor='white'
                 />
             </View>
 
