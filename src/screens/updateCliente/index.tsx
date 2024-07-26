@@ -1,44 +1,28 @@
 import { View, Text, Image, TextInput, Alert } from 'react-native';
-import { styles } from './styles';
-import { CustomButton } from '../../components/ButtonXL';
+import {styles} from './styles';
+import { CustomButton } from '../../components/ButtonLG';
 import { useState } from 'react';
 
-export function CreateCliente() {
+export function UpdateCliente() {
     const handlePress = () => {
-        Alert.alert('Left button pressed');
+        Alert.alert ('Left button pressed');
     };
 
     const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [phone, setPhone] = useState('');
     const [cpf, setCpf] = useState('');
     const [address, setAddress] = useState('');
-    
+
     return (
-        <View style={styles.container}>
-            <View style={styles.align}>
-                <Text style={styles.text}> Insira seus dados</Text>
+        <View style ={styles.container}>
+            <View style = {styles.align}>
+                <Text style = {styles.text}>Edite seus dados</Text>
                 <TextInput
                     style={styles.input}
                     placeholder='Nome completo'
                     placeholderTextColor='#9089CB'
                     onChangeText={(text) => setName(text)}
                     value={name}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder='Email'
-                    placeholderTextColor='#9089CB'
-                    onChangeText={(text) => setEmail(text)}
-                    value={email}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder='Senha'
-                    placeholderTextColor='#9089CB'
-                    onChangeText={(text) => setPassword(text)}
-                    value={password}
                 />
                 <TextInput
                     style={styles.input}
@@ -61,15 +45,15 @@ export function CreateCliente() {
                     onChangeText={(text) => setAddress(text)}
                     value={address}
                 />
-            </View>
-            <View>
+                <View>
                     <CustomButton
-                        title="Cadastrar"
+                        title="Salvar"
                         onPress={handlePress}
                         color='#564CAF'
                         textColor='white'
                     />
                 </View>
+            </View>
         </View>
     )
 }

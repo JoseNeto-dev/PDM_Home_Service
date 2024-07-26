@@ -1,11 +1,11 @@
 // styles.ts
 import { StyleSheet } from 'react-native';
-
+import { globalTheme } from '../../global/styles/themes';
 export const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 24,
     paddingTop: 70,
-    backgroundColor: '#eae1fd',
+    backgroundColor: globalTheme.COLORS.purple300,
     height: '100%',
     alignItems: 'center', // Alinhar itens no centro horizontalmente
     justifyContent: 'center', // Alinhar itens no centro verticalmente
@@ -17,10 +17,11 @@ export const styles = StyleSheet.create({
   },
 
   title: {
-    color: '#564caf',
-    fontSize: 36,
+    color: globalTheme.COLORS.purple700,
+    fontSize: globalTheme.SIZE.xl,
     marginTop: 20,
-    marginBottom: 30
+    marginBottom: 30,
+    fontFamily: globalTheme.FONTS.bold
 
   },
   logo: {
@@ -36,13 +37,14 @@ export const styles = StyleSheet.create({
   input:{
     height:56,
     width: 350,
-    backgroundColor:'#fff',
-    fontSize:20,
+    backgroundColor: globalTheme.COLORS.white,
+    fontSize: globalTheme.SIZE.sm,
     marginBottom: 10,
     paddingLeft: 28,
     borderRadius:15,
     borderWidth: 0.5,
-    borderColor: "#9089CB"
+    borderColor: globalTheme.COLORS.purple400,
+    fontFamily: globalTheme.FONTS.regular
   },  
   inputSecurity:{
     height:56,
@@ -60,9 +62,9 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     width: "100%",
     height: 56,
-    backgroundColor: "#fff",
+    backgroundColor: globalTheme.COLORS.white,
     borderRadius:15,
     borderWidth: 0.5,
-    borderColor: "#9089CB",
+    borderColor: globalTheme.COLORS.purple400,
   }
 });

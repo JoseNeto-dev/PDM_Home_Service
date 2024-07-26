@@ -1,11 +1,12 @@
 // styles.ts
 import { StyleSheet } from 'react-native';
+import { globalTheme } from '../../global/styles/themes';
 
 export const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 24,
     paddingTop: 70,
-    backgroundColor: '#eae1fd',
+    backgroundColor: globalTheme.COLORS.purple300,
     height: '100%',
     alignItems: 'center', // Alinhar itens no centro horizontalmente
     justifyContent: 'center', // Alinhar itens no centro verticalmente
@@ -16,9 +17,10 @@ export const styles = StyleSheet.create({
     marginBottom: 25
   },
   text: {
-    color: '#564caf',
-    fontSize: 20,
-    marginBottom: 25
+    color: globalTheme.COLORS.purple700,
+    fontSize: globalTheme.SIZE.sm,
+    marginBottom: 25,
+    fontFamily: globalTheme.FONTS.regular
 },
   logo: {
     width: 140,
@@ -27,12 +29,12 @@ export const styles = StyleSheet.create({
   input:{
     height:56,
     width: 350,
-    backgroundColor:'#fff',
-    fontSize:20,
+    backgroundColor: globalTheme.COLORS.white,
+    fontSize: globalTheme.SIZE.sm,
     marginBottom: 10,
     paddingLeft: 28,
     borderRadius:15,
     borderWidth: 0.5,
-    borderColor: "#9089CB"
+    borderColor: globalTheme.COLORS.purple400
   }
 });

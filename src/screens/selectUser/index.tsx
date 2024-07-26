@@ -1,5 +1,5 @@
 import { View, Text, Image, Button, Alert } from 'react-native';
-import { CustomButton } from '../../components/ButtonXM';
+import { CustomButton } from '../../components/ButtonXL';
 import { styles } from './style';
 
 

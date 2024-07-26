@@ -1,6 +1,6 @@
 import { View, Text, Image, TextInput, Alert } from 'react-native';
 import { styles } from './styles';
-import { CustomButton } from '../../components/ButtonXM';
+import { CustomButton } from '../../components/ButtonXL';
 import { useState } from 'react';
 
 export function CreatePrestador() {

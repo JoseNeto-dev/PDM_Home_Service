@@ -1,7 +1,7 @@
 import { View, Text, Image, TextInput, Alert, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
 import { styles } from './styles';
-import { CustomButton } from '../../components/ButtonXM';
+import { CustomButton } from '../../components/ButtonXL';
 import { Ionicons } from '@expo/vector-icons';
 
 

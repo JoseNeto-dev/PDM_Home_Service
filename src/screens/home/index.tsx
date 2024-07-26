@@ -1,6 +1,6 @@
 import { View, Text, Image, Button, Alert } from 'react-native';
 import { styles } from './styles';
-import { CustomButton } from '../../components/ButtonXM';
+import { CustomButton } from '../../components/ButtonXL';
 
 export function Home() {
     const handlePress = () => {

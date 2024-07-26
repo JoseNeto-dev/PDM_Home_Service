@@ -1,7 +1,6 @@
 // styles.ts
 import { StyleSheet } from 'react-native';
 import { globalTheme } from '../../global/styles/themes';
-
 export const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 24,
@@ -14,7 +13,7 @@ export const styles = StyleSheet.create({
   align: {
     alignItems: 'center', // Alinhar itens no centro horizontalmente
     justifyContent: 'center', // Alinhar itens no centro verticalmente
-    marginBottom: 25
+
   },
   text: {
     color: globalTheme.COLORS.purple700,
@@ -26,10 +25,14 @@ export const styles = StyleSheet.create({
     width: 140,
     height: 140,  
   },
+  buttonTitleType1: {
+    fontSize: globalTheme.SIZE.sm,
+    color: globalTheme.COLORS.white
+  },
   input:{
     height:56,
     width: 350,
-    backgroundColor: globalTheme.COLORS.white,
+    backgroundColor:globalTheme.COLORS.white,
     fontSize: globalTheme.SIZE.sm,
     marginBottom: 10,
     paddingLeft: 28,
