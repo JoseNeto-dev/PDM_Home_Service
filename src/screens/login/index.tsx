@@ -14,9 +14,6 @@ export function Login() {
     const [password, setPassword] = useState('');
     const [hide, setHide] = useState(true);
 
-    { console.log(email) }
-    { console.log(hide) }
-
     return (
         <View style={styles.container}>
 

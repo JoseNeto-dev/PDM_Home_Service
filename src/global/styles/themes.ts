@@ -1,8 +1,9 @@
 export const globalTheme = {
     COLORS:{
       white: '#fff',
-
+      
       purple300: '#eae1fd',
+      purple350: '#BDBAD4',
       purple400: '#9089cb',
       purple500: '#736bbd',
       purple600: '#5e54b3',
