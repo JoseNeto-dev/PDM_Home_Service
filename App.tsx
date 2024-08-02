@@ -8,6 +8,7 @@ import { CreateCliente } from './src/screens/createCliente';
 import { UpdateCliente } from './src/screens/updateCliente';
 import { useFonts, Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto';
 import { Loading } from "./src/components/Loading";
+import { PerfilPrestador } from './src/screens/perfilPrestador';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -28,10 +29,10 @@ export default function App() {
       />
       {/* <Home/>  */}
       {/* <SelectUser/> */}
-      <Login/>
+      {/* <Login/> */}
       {/* <CreatePrestador/> */}
       {/* <CreateCliente/> */}
-      {/* <UpdateCliente/> */}
+      <PerfilPrestador/>
     </View>
   );
 }

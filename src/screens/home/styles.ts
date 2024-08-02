@@ -1,4 +1,3 @@
-// styles.ts
 import { StyleSheet } from 'react-native';
 import { globalTheme } from '../../global/styles/themes';
 export const styles = StyleSheet.create({
