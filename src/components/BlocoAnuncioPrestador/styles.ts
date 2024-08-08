@@ -4,7 +4,7 @@ import { color } from '@rneui/themed/dist/config';
 
 export const blocoAnuncioStyles = StyleSheet.create({
     container: {
-        height: 112,
+        height: 131,
         width: 370,
         flexDirection: 'row',
         borderColor: globalTheme.COLORS.purple700,
@@ -28,7 +28,7 @@ export const blocoAnuncioStyles = StyleSheet.create({
         color: globalTheme.COLORS.purple700
     },
     textName: {
-        width: '60%'
+        width: '70%'
     },
     image: {
         width: 50,
@@ -51,11 +51,11 @@ export const blocoAnuncioStyles = StyleSheet.create({
         marginEnd: 20,
         position: 'absolute', // Posição absoluta para sobreposição
         zIndex: 2,
-        left: '78%',
-        top: '22%'
+        left: '90%',
+        top: '33%'
     },
     icons: {
-        backgroundColor: globalTheme.COLORS.purple200,
+        backgroundColor: globalTheme.COLORS.purple700,
         borderRadius: 20,
         padding: 5,
         alignItems: 'center',
