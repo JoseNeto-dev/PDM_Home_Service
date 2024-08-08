@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, Image, ImageSourcePropType } from 'react-native';
-import { blocoAnuncioStyles } from "../BlocoAnuncioPrestador/styles"
+import { blocoAnuncioStyles } from "./styles"
 import { globalTheme } from '../../global/styles/themes';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
