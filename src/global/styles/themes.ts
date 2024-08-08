@@ -1,7 +1,10 @@
+import { purple200 } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
+
 export const globalTheme = {
     COLORS:{
       white: '#fff',
       
+      purple200: '#e8e8e8',
       purple300: '#eae1fd',
       purple350: '#BDBAD4',
       purple400: '#9089cb',

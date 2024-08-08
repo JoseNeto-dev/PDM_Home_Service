@@ -9,6 +9,7 @@ import { UpdateCliente } from './src/screens/updateCliente';
 import { useFonts, Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto';
 import { Loading } from "./src/components/Loading";
 import { PerfilPrestador } from './src/screens/perfilPrestador';
+import { InitialPrestador } from './src/screens/initialPrestador';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -32,7 +33,8 @@ export default function App() {
       {/* <Login/> */}
       {/* <CreatePrestador/> */}
       {/* <CreateCliente/> */}
-      <PerfilPrestador/>
+      {/* <PerfilPrestador/> */}
+      <InitialPrestador/>
     </View>
   );
 }
