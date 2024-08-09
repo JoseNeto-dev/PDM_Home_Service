@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StatusBar } from 'react-native';
+import { View, StatusBar, SafeAreaView } from 'react-native';
 import { Home } from './src/screens/home';
 import { SelectUser } from './src/screens/selectUser';
 import { Login } from './src/screens/login';
@@ -8,7 +8,7 @@ import { CreateCliente } from './src/screens/createCliente';
 import { UpdateCliente } from './src/screens/updateCliente';
 import { useFonts, Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto';
 import { Loading } from "./src/components/Loading";
-import { PerfilPrestador } from './src/screens/perfilPrestador';
+import { PerfilPrestador } from './src/screens/profilePrestador';
 import { InitialPrestador } from './src/screens/initialPrestador';
 import { InitialCliente } from './src/screens/initialCliente';
 
@@ -23,12 +23,7 @@ export default function App() {
   }
 
   return (
-    <View style={{ flex: 1 }}>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor="transparent"
-        translucent
-      />
+    <SafeAreaView style={{ flex: 1 }}>
       {/* <Home/>  */}
       {/* <SelectUser/> */}
       {/* <Login/> */}
@@ -36,7 +31,7 @@ export default function App() {
       {/* <CreateCliente/> */}
       {/* <PerfilPrestador/> */}
       {/* <InitialPrestador/> */}
-      <InitialCliente/>
-    </View>
+      <InitialCliente />
+    </SafeAreaView>
   );
 }
