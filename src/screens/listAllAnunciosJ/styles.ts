@@ -9,5 +9,9 @@ export const styles = StyleSheet.create({
     height: '100%',
     alignItems: 'center', // Alinhar itens no centro horizontalmente
     justifyContent: 'center', // Alinhar itens no centro verticalmente
+    gap:20
+  },
+  buttonVoltar:{
+    marginRight:335,
   }
 });

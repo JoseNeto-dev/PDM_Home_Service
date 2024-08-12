@@ -4,18 +4,17 @@ import { color } from '@rneui/themed/dist/config';
 
 export const blocoAnuncioStyles = StyleSheet.create({
     container: {
-        height: 112,
+        height: 112 ,
         width: 370,
         flexDirection: 'row',
         borderColor: globalTheme.COLORS.purple700,
         borderRadius: 20,
         backgroundColor: globalTheme.COLORS.white,
         borderWidth: 2,
-        paddingLeft: 28, // Adiciona espaçamento à esquerda
+        paddingLeft: 20, // Adiciona espaçamento à esquerda
         alignItems: 'center', // Centraliza verticalmente os conteúdos na linha
-        gap: 20,
+        gap: 15,
         margin: 5
-
     },
     description: {
         fontSize: globalTheme.SIZE.sm,
@@ -28,7 +27,7 @@ export const blocoAnuncioStyles = StyleSheet.create({
         color: globalTheme.COLORS.purple700
     },
     textName: {
-        width: '60%'
+        width: '70%'
     },
     image: {
         width: 50,
@@ -39,7 +38,7 @@ export const blocoAnuncioStyles = StyleSheet.create({
         position: 'relative', // Posição relativa para referência
         zIndex: 1,
         gap:1,
-        width: 240
+        width: 245
     },
     iconView: {
         flexDirection: 'row',
@@ -50,12 +49,14 @@ export const blocoAnuncioStyles = StyleSheet.create({
         marginEnd: 20,
         position: 'absolute', // Posição absoluta para sobreposição
         zIndex: 2,
-        left: 260,
-        top: 28
+        left: 300,
+        top: 27
     },
     icons: {
-        backgroundColor: globalTheme.COLORS.purple200,
-        borderRadius: 20,
+        backgroundColor: globalTheme.COLORS.purple700,
+        width: 30,
+        height: 30,
+        borderRadius: 25,
         padding: 5,
         alignItems: 'center',
         justifyContent: 'center',

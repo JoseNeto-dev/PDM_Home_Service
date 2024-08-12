@@ -34,11 +34,11 @@ export const blocoAnuncioStyles = StyleSheet.create({
         height: 50,
     },
     textContainer: {
-        flex: 1, // Ocupa o espaço restante entre o ícone e as ações
         justifyContent: 'center',
         position: 'relative', // Posição relativa para referência
         zIndex: 1,
-        gap:1
+        gap:1,
+        width: 233
 
     },
     iconView: {
@@ -50,11 +50,13 @@ export const blocoAnuncioStyles = StyleSheet.create({
         marginEnd: 20,
         position: 'absolute', // Posição absoluta para sobreposição
         zIndex: 2,
-        left: '90%',
-        top: '33%'
+        left: 300,
+        top: 48
     },
     icons: {
         backgroundColor: globalTheme.COLORS.purple700,
+        width: 30,
+        height: 30,
         borderRadius: 25,
         padding: 5,
         alignItems: 'center',

@@ -18,6 +18,7 @@ export const globalTheme = {
       bold:'Roboto_700Bold',
     },
     SIZE:{
+      xxm: 12,
       xm: 16,
       sm: 20,
       lg: 24,

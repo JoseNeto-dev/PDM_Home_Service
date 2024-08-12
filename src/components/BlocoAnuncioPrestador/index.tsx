@@ -4,7 +4,7 @@ import { ImageProps } from "react-native";
 import { blocoAnuncioStyles } from "./styles"
 import Edit from '@expo/vector-icons/MaterialIcons';
 import Delet from '@expo/vector-icons/MaterialIcons';
-import { styles } from '../../screens/home/styles';
+import { styles } from '../../screens/homeZ/styles';
 import { globalTheme } from '../../global/styles/themes';
 
 
