@@ -34,6 +34,7 @@ export default function App() {
       <StatusBar
         barStyle='default'
         backgroundColor='black'
+
       />
       {/* Danrlei */}
 
@@ -45,7 +46,7 @@ export default function App() {
       {/* <Login/> */}
 
       {/* Joyce */}
-      <NavigationContainer>
+      {/* <NavigationContainer>
         <Tab.Navigator>
           <Tab.Screen
             name="Criar Anúncio"
@@ -72,8 +73,8 @@ export default function App() {
             }}
           />
         </Tab.Navigator>
-      </NavigationContainer>
-      {/* <ListAnuncios /> */}
+      </NavigationContainer> */}
+      <ListAnuncios />
       {/* <SelectUser/> */}
 
     </SafeAreaView>

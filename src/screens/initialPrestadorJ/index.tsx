@@ -1,7 +1,7 @@
 import { View, Text, Image, Button, Alert, FlatList } from 'react-native';
 import { styles } from './styles';
 import { CustomButton } from '../../components/ButtonXL';
-import { BlocoInformationPrestador } from '../../components/BlocoInfomationPrestador';
+import { BlocoInformationPrestador } from '../../components/BlocoPrestadorCliente';
 import { Header } from '../../components/Header';
 import { BlocoAnuncioPrestador } from '../../components/BlocoAnuncioPrestador';
 
@@ -72,7 +72,7 @@ export function InitialPrestador() {
             title: 'Instalação Elétrica Residencial',
             image: require('../../../assets/chupeta.png'),
         },
-        // Adicione mais itens se necessário
+        // Dados que simulam a API
     ];
 
     return (
@@ -95,9 +95,15 @@ export function InitialPrestador() {
                         title={item.title}
                         image={item.image}
                     />
-                )}
+                ) 
+            }
                 keyExtractor={(item) => item.id}
-                contentContainerStyle={{ paddingBottom: 20 }}
+                contentContainerStyle={{
+                    alignItems: 'center', // Centraliza os itens na horizontal
+                    justifyContent: 'center', // Centraliza os itens na vertical
+                    paddingBottom: 20,
+                }}
+                style={{ flex: 1 }} // Ocupará o espaço disponível da tela
             />
 
         </View>)
