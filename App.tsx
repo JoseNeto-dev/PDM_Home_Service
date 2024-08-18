@@ -15,6 +15,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons'; // ou FontAwesome, MaterialIcons, etc.
 import { globalTheme } from './src/global/styles/themes';
+import { ListPrestadores } from './src/screens/listAllPrestadorJ';
+import { CategoriaEscolhida } from './src/screens/categoryAnunciosJ';
 
 
 const Tab = createBottomTabNavigator();
@@ -46,7 +48,7 @@ export default function App() {
       {/* <Login/> */}
 
       {/* Joyce */}
-      {/* <NavigationContainer>
+      <NavigationContainer>
         <Tab.Navigator>
           <Tab.Screen
             name="Criar Anúncio"
@@ -73,9 +75,12 @@ export default function App() {
             }}
           />
         </Tab.Navigator>
-      </NavigationContainer> */}
-      <ListAnuncios />
+      </NavigationContainer>
+      {/* <ListAnuncios /> */}
+      {/* <ListPrestadores /> */}
+      {/* <CategoriaEscolhida /> */}
       {/* <SelectUser/> */}
+    
 
     </SafeAreaView>
   );

@@ -32,6 +32,8 @@ export const blocoAnuncioStyles = StyleSheet.create({
     image: {
         width: 50,
         height: 50,
+        borderRadius: 1000,
+       
     },
     textContainer: {
         justifyContent: 'center',
