@@ -30,6 +30,6 @@ export function Home() {
                     borderWidth={0.5}
                 />
             </View>
-        </View>
-    )
+        </View>
+    )
 }
