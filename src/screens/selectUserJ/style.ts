@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { globalTheme } from '../../global/styles/themes';
-export const styles = StyleSheet.create({
 
+export const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 24,
         paddingTop: 70,
@@ -9,6 +9,12 @@ export const styles = StyleSheet.create({
         height: '100%',
         alignItems: 'center', // Alinhar itens no centro horizontalmente
         justifyContent: 'center', // Alinhar itens no centro verticalmente
+    },
+    buttonVoltar: {
+        position: 'absolute', // Remove o botão do fluxo normal
+        top: 30, // Ajuste este valor para posicionar o botão mais alto ou mais baixo na tela
+        left: 15, // Ajuste este valor para posicionar o botão mais à esquerda
+        zIndex: 1, // Garante que o botão fique sobre outros elementos, se necessário
     },
     text: {
         color: globalTheme.COLORS.purple700,

@@ -7,6 +7,7 @@ import { SelectUser } from "../../screens/selectUserJ";
 import { CreatePrestador } from "../../screens/createPrestadorZ";
 import { CreateCliente } from "../../screens/createClienteZ";
 import { Login } from "../../screens/loginZ";
+import { ListAnuncios } from "../../screens/listAllAnunciosJ";
 
 const { Navigator, Screen } = createNativeStackNavigator()
 
@@ -18,6 +19,7 @@ export function NavigationStack() {
             <Screen name="SelectUser" component={SelectUser} />
             <Screen name="CreatePrestador" component={CreatePrestador} />
             <Screen name="CreateCliente" component={CreateCliente} />
+            <Screen name="ListAnuncios" component={ListAnuncios} />
         </Navigator>
     )
 }

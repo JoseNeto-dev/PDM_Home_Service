@@ -4,6 +4,7 @@ import { CustomButton } from '../../components/ButtonXL';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { globalTheme } from '../../global/styles/themes';
 import { BlocoInformationPrestador } from '../../components/BlocoPrestadorCliente';
+import { ButtonVoltar } from '../../components/ButtonVoltar';
 
 
 
@@ -74,9 +75,9 @@ export function ListPrestadores() {
 
     return (
         <View style={styles.container}>
-            {/* view de botao de voltar*/}
+          
             <View style={styles.buttonVoltar}>
-                <AntDesign name="arrowleft" size={24} color={globalTheme.COLORS.purple700} />
+                <ButtonVoltar/>
             </View>
             <FlatList
                 data={dadosPrestador}
