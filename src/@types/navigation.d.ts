@@ -6,6 +6,7 @@ export declare global {
         CreateCliente: undefined;
         ListAnuncios: undefined;
         SelectUser: undefined;
+        CreateAnuncio: undefined;
         // PageB: {user:{
         //   name:string,
         //   cpf:string

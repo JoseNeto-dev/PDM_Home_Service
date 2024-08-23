@@ -21,4 +21,21 @@ title: {
   alignSelf: 'center',
   marginBottom:17
 },
+barra:{
+  backgroundColor: globalTheme.COLORS.white, // Cor de fundo da barra
+  width:"100%",
+  height: 65, // Altura da barra
+  borderTopWidth: 2, // Largura da borda superior
+  borderTopColor: globalTheme.COLORS.purple200, // Cor da borda superior
+  paddingBottom: 10, // Espaçamento interno inferior
+  paddingTop: 10, // Espaçamento interno superior
+  alignItems: "center"
+},
+iconButton:{
+
+},
+textBotton:{
+  fontSize: globalTheme.SIZE.xxm, // Tamanho do texto
+  color: globalTheme.COLORS.purple700, // Cor do título/tab label
+}
 });

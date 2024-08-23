@@ -6,20 +6,14 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 
 interface CustomHeaderProps {
-    onPress: () => void;
     image: ImageSourcePropType;
 }
 
-export function Header({ image, onPress }: CustomHeaderProps) {
+export function Header({ image }: CustomHeaderProps) {
     return (
         <View style={styles.container}>
-
             <Text style={styles.title}>HomeServices</Text>
-                <Image style={styles.imageProfile} source={image} />
-            {/* <View style={styles.image}>
-            </View> */}
-
-
+            <Image style={styles.imageProfile} source={image} />
         </View>
     );
 }

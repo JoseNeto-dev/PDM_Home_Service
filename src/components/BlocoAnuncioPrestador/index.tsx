@@ -12,12 +12,11 @@ import { ConfirmModal } from '../ModalConfirmation';
 interface CustomBlocoProps {
     namePrestador: string;
     title: string;
-    onPress: () => void;
     image: ImageSourcePropType;
     preco: string;
 }
 
-export function BlocoAnuncioPrestador({ namePrestador, title, onPress, image, preco }: CustomBlocoProps) {
+export function BlocoAnuncioPrestador({ namePrestador, title, image, preco }: CustomBlocoProps) {
     const [isModalVisible, setModalVisible] = useState(false);
 
     const handleDeletePress = () => {

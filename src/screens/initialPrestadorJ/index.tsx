@@ -1,18 +1,22 @@
-import { View, Text, Image, Button, Alert, FlatList } from 'react-native';
+import { View, Text, Image, Button, Alert, FlatList, TouchableOpacity } from 'react-native';
 import { styles } from './styles';
 import { CustomButton } from '../../components/ButtonXL';
 import { BlocoInformationPrestador } from '../../components/BlocoPrestadorCliente';
 import { Header } from '../../components/Header';
 import { BlocoAnuncioPrestador } from '../../components/BlocoAnuncioPrestador';
 
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Home } from '../homeZ';
+import { globalTheme } from '../../global/styles/themes';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 
 export function InitialPrestador() {
-    const handlePress = () => {
-        Alert.alert('Left button pressed');
+    
+    const navigation = useNavigation()
+    const criarAnuncio = () => {
+        // navigation.navigate('CreateAnuncio');
     };
 
     const dadosAnuncios = [
@@ -77,7 +81,7 @@ export function InitialPrestador() {
 
     return (
         <View style={styles.container}>
-            <Header image={require('../../../assets/jesus.png')} onPress={handlePress} key={2} />
+            <Header image={require('../../../assets/jesus.png')} key={2} />
 
             <FlatList
                 data={dadosAnuncios}
@@ -90,13 +94,12 @@ export function InitialPrestador() {
                 renderItem={({ item }) => (
                     <BlocoAnuncioPrestador
                         namePrestador={item.namePrestador}
-                        onPress={handlePress}
                         preco={item.preco}
                         title={item.title}
                         image={item.image}
                     />
-                ) 
-            }
+                )
+                }
                 keyExtractor={(item) => item.id}
                 contentContainerStyle={{
                     alignItems: 'center', // Centraliza os itens na horizontal
@@ -104,7 +107,16 @@ export function InitialPrestador() {
                     paddingBottom: 20,
                 }}
                 style={{ flex: 1 }} // Ocupará o espaço disponível da tela
+
             />
+            <View style={styles.barra}>
+                <TouchableOpacity onPress={criarAnuncio}>
+                    <Icon name="add-circle-outline" color={globalTheme.COLORS.purple700} size={30} />
+                </TouchableOpacity>
+                <Text style={styles.textBotton}>
+                    Criar Anúncio
+                </Text>
+            </View>
 
         </View>)
 
