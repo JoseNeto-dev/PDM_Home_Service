@@ -11,7 +11,7 @@ export function InitialPrestador() {
     
     const navigation = useNavigation()
     const criarAnuncio = () => {
-        // navigation.navigate('CreateAnuncio');
+         navigation.navigate('CreateAnuncio');
     };
 
     const dadosAnuncios = [

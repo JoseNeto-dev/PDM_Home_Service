@@ -7,7 +7,7 @@ import Delet from '@expo/vector-icons/MaterialIcons';
 import { styles } from '../../screens/homeZ/styles';
 import { globalTheme } from '../../global/styles/themes';
 import { ConfirmModal } from '../ModalConfirmation';
-
+import { useNavigation } from '@react-navigation/native';
 
 interface CustomBlocoProps {
     namePrestador: string;
@@ -17,10 +17,15 @@ interface CustomBlocoProps {
 }
 
 export function BlocoAnuncioPrestador({ namePrestador, title, image, preco }: CustomBlocoProps) {
+    const navigation = useNavigation();
     const [isModalVisible, setModalVisible] = useState(false);
 
     const handleDeletePress = () => {
         setModalVisible(true);
+    };
+
+    const editAnuncioPress = () => {
+        navigation.navigate('UpdateAnuncio');
     };
 
     const confirmDelete = () => {
@@ -47,7 +52,7 @@ export function BlocoAnuncioPrestador({ namePrestador, title, image, preco }: Cu
                 </View>
             </View>
             <View style={blocoAnuncioStyles.iconView}>
-                <TouchableOpacity onPress={() => console.log('Edit icon pressed')} style={blocoAnuncioStyles.icons}>
+                <TouchableOpacity onPress={editAnuncioPress} style={blocoAnuncioStyles.icons}>
                     <Edit name="edit" size={24} color={globalTheme.COLORS.purple700} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={handleDeletePress} style={blocoAnuncioStyles.icons}>

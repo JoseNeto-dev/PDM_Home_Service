@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Image, Alert, ViewStyle, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native'; // Importe o hook de navegação
+import { useNavigation } from '@react-navigation/native';
 import { styles } from './styles';
 import { CustomButton } from '../../components/ButtonSM';
 import { ConfirmModal } from '../../components/ModalConfirmation';
@@ -14,7 +14,7 @@ const endereco = 'Rua dos bobos - 0';
 
 export function ProfileCliente() {
     const [isModalVisible, setModalVisible] = useState(false);
-    const navigation = useNavigation();  // Hook de navegação
+    const navigation = useNavigation();
 
     const handleDeletePress = () => {
         setModalVisible(true);
