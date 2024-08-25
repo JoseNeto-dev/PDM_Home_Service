@@ -23,11 +23,11 @@ export function ConfirmModal({ visible, onClose, onConfirm, title, message }: Co
                     <Text style={styles.title}>{title}</Text>
                     <Text style={styles.message}>{message}</Text>
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styles.buttonCancelar} onPress={onConfirm}>
+                        <TouchableOpacity style={styles.buttonCancelar} onPress={onClose}>
                             <Text style={styles.buttonText}>Cancelar</Text>
                         </TouchableOpacity>
                         <View style={styles.separator}></View>
-                        <TouchableOpacity style={styles.buttonConfirmar} onPress={onClose}>
+                        <TouchableOpacity style={styles.buttonConfirmar} onPress={onConfirm}>
                             <Text style={styles.buttonText}>Confirmar</Text>
                         </TouchableOpacity>
                     </View>
