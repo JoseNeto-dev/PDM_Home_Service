@@ -1,15 +1,10 @@
 import { View, Text, Image, Button, Alert, FlatList, TouchableOpacity } from 'react-native';
 import { styles } from './styles';
-import { CustomButton } from '../../components/ButtonXL';
-import { BlocoInformationPrestador } from '../../components/BlocoPrestadorCliente';
 import { Header } from '../../components/Header';
 import { BlocoAnuncioPrestador } from '../../components/BlocoAnuncioPrestador';
-
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home } from '../homeZ';
 import { globalTheme } from '../../global/styles/themes';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
 
 export function InitialPrestador() {
@@ -119,6 +114,4 @@ export function InitialPrestador() {
             </View>
 
         </View>)
-
-
 }
