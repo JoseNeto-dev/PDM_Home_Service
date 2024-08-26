@@ -5,6 +5,7 @@ export declare global {
         CreatePrestador: undefined;
         CreateCliente: undefined;
         ListAnuncios: undefined;
+        ListPrestadores: undefined;
         SelectUser: undefined;
         CreateAnuncio: undefined;
         UpdateCliente: undefined;

@@ -16,7 +16,7 @@ titleContainer: {
 },
 title: {
   fontFamily: globalTheme.FONTS.bold,
-  fontSize: globalTheme.SIZE.xl,
+  fontSize: 28,
   color: globalTheme.COLORS.purple700,
   alignSelf: 'center',
   marginBottom:17
@@ -30,6 +30,12 @@ barra:{
   paddingBottom: 10, // Espaçamento interno inferior
   paddingTop: 10, // Espaçamento interno superior
   alignItems: "center",
+  flexDirection: 'row',
+  justifyContent: 'space-around',
+  
+},
+buttonContainer: {
+  alignItems: 'center',
 },
 iconButton:{
 
@@ -37,5 +43,10 @@ iconButton:{
 textBotton:{
   fontSize: globalTheme.SIZE.xxm, // Tamanho do texto
   color: globalTheme.COLORS.purple700, // Cor do título/tab label
+},
+headerImage:{
+  width: 146,
+  height: 127,
+  marginBottom: 17,
 }
 });

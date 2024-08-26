@@ -6,7 +6,7 @@ import { color } from '@rneui/themed/dist/config';
 export const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        top: 0, //apagar aqui depois - resolver safeArea
+        top: 33, //apagar aqui depois - resolver safeArea
         left: 0,
         right: 0,
         height: 83,
