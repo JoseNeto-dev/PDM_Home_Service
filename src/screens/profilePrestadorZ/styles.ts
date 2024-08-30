@@ -20,6 +20,9 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 20
   },
+  buttonVoltar:{
+    alignSelf: 'flex-start',
+  },
   separator: {
     borderBottomWidth: 1,
     borderBottomColor: globalTheme.COLORS.purple350,

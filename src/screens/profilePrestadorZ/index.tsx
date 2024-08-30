@@ -4,6 +4,9 @@ import { Divider, Text } from 'react-native-paper';
 import { CustomButton } from '../../components/ButtonSM';
 
 import { globalTheme } from '../../global/styles/themes';
+import { useState } from 'react';
+import { ConfirmModal } from '../../components/ModalConfirmation';
+import { ButtonVoltar } from '../../components/ButtonVoltar';
 
 
 const nome = 'Joyce dos Santos Silva';
@@ -12,20 +15,34 @@ const telefone = '(83) 99999-9999';
 const cnpj = '12.345.678/0001-00';
 const horario = '12h às 19h';
 
-export function PerfilPrestador() {
+export function ProfilePrestador() {
+    const handleDeletePress = () => {
+        setModalVisible(true);
+    };
+
+    const confirmDelete = () => {
+        setModalVisible(false);
+        console.log('Perfil deletado!');
+        Alert.alert('Perfil deletado com sucesso!');
+    };
+
+    const [isModalVisible, setModalVisible] = useState(false);
+
     const handlePress = () => {
         Alert.alert('Left button pressed');
     };
     return (
         <View style={styles.container}>
-
+            <View style={styles.buttonVoltar}>
+                <ButtonVoltar/>
+            </View>
             {/* view das imagens */}
             <View style={styles.imageView}>
-                <Image 
+                <Image
                     source={require('../../../assets/jesus.png')}
                     style={styles.profile}
                 />
-                <Text style={styles.editProfile}> 
+                <Text style={styles.editProfile}>
                     Alterar Foto
                 </Text>
 
@@ -67,11 +84,18 @@ export function PerfilPrestador() {
                 />
                 <CustomButton
                     title="Excluir"
-                    onPress={handlePress}
+                    onPress={handleDeletePress}
                     color='#564CAF'
                     textColor='white'
                 />
             </View>
+            <ConfirmModal
+                visible={isModalVisible}
+                onConfirm={confirmDelete}
+                onClose={() => setModalVisible(false)}
+                title={'Perfil'}
+                message={'Deseja realmente excluir seu perfil?'}
+            />
 
         </View>
     )

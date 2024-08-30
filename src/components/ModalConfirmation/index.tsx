@@ -14,7 +14,7 @@ export function ConfirmModal({ visible, onClose, onConfirm, title, message }: Co
     return (
         <Modal
             transparent={true}
-            animationType="slide"
+            animationType="none"
             visible={visible}
             onRequestClose={onClose}
         >
