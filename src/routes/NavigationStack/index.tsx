@@ -21,14 +21,14 @@ const { Navigator, Screen } = createNativeStackNavigator()
 
 export function NavigationStack() {
     return(
-        <Navigator initialRouteName="InitialCliente" screenOptions={{headerShown: false}}>
+        <Navigator initialRouteName="CreatePrestador" screenOptions={{headerShown: false}}>
             <Screen name="Home" component={Home} />
             <Screen name="Login" component={Login} />
             <Screen name="SelectUser" component={SelectUser} />
             <Screen name="CreatePrestador" component={CreatePrestador} />
             <Screen name="CreateCliente" component={CreateCliente} />
             <Screen name="ListAnuncios" component={ListAnuncios} />
-            <Screen name = "ListPrestadores" component={ListPrestadores} />
+            <Screen name ="ListPrestadores" component={ListPrestadores} />
             <Screen name="CategoriaEscolhida" component={CategoriaEscolhida} />
             <Screen name="InitialPrestador" component={InitialPrestador} />
             <Screen name="ProfileCliente" component={ProfileCliente} />

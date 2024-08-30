@@ -1,11 +1,22 @@
-import { View, Text, Image, Button, Alert } from 'react-native';
+import { View, Text, Image, Alert } from 'react-native';
 import { styles } from './styles';
 import { CustomButton } from '../../components/ButtonXL';
+import { useNavigation } from '@react-navigation/native';
+import { SelectUser } from '../selectUserJ';
+import { Login } from '../loginZ';
 
 export function Home() {
-    const handlePress = () => {
-        Alert.alert('Left button pressed');
+
+    const navigation = useNavigation()
+
+    const entrar = () => {
+        navigation.navigate("Login") 
     };
+
+    const cadastrar = () => {
+        navigation.navigate("SelectUser") 
+    };
+    
 
     return (
         <View style={styles.container}>
@@ -14,22 +25,22 @@ export function Home() {
                     source={require('../../../assets/logo.png')}
                     style={styles.logo}
                 />
-                <Text style={styles.title}> Home Services</Text>
+                <Text style={styles.title}>Home Services</Text>
                 <CustomButton
                     title="Entrar"
-                    onPress={handlePress}
+                    onPress={entrar}
                     color='#564CAF'
                     textColor='white'
                 />
                 <CustomButton
                     title="Cadastrar"
-                    onPress={() => Alert.alert('Left button pressed')}
-                    color='#ffff'
+                    onPress={cadastrar}
+                    color='#fff'
                     textColor='#564CAF'
                     borderColor='#564CAF'
                     borderWidth={0.5}
                 />
             </View>
-        </View>
-    )
+        </View>
+    )
 }

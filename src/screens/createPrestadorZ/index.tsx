@@ -5,8 +5,18 @@ import { requestForegroundPermissionsAsync, getCurrentPositionAsync, LocationObj
 import MapView, { Marker } from 'react-native-maps';
 import { CustomButton } from '../../components/ButtonXL';
 import { ButtonVoltar } from '../../components/ButtonVoltar';
+import { useNavigation } from '@react-navigation/native';
 
 export function CreatePrestador() {
+
+    const navigation = useNavigation()
+
+    
+    const cadastrar = () => {
+        navigation.navigate("Login");
+        handleSave();
+    };
+
     const [markerCoordinate, setMarkerCoordinate] = useState({
         latitude: -6.888765940097697, // Coordenadas iniciais
         longitude: -38.55928242075309,
@@ -145,7 +155,7 @@ export function CreatePrestador() {
                     }}>
                         <CustomButton
                             title="Cadastrar"
-                            onPress={handleSave}
+                            onPress={cadastrar}
                             color='#564CAF'
                             textColor='white'
                         />

@@ -2,10 +2,15 @@ import { View, Text, Image, TextInput, Alert } from 'react-native';
 import { styles } from './styles';
 import { CustomButton } from '../../components/ButtonXL';
 import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 export function CreateCliente() {
-    const handlePress = () => {
-        Alert.alert('Left button pressed');
+
+    const navigation = useNavigation()
+
+    
+    const cadastrar = () => {
+        navigation.navigate("Login") 
     };
 
     const [name, setName] = useState('');
@@ -65,7 +70,7 @@ export function CreateCliente() {
             <View>
                     <CustomButton
                         title="Cadastrar"
-                        onPress={handlePress}
+                        onPress={cadastrar}
                         color='#564CAF'
                         textColor='white'
                     />

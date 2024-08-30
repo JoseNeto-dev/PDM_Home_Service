@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { styles } from './styles';
 import { CustomButton } from '../../components/ButtonXL';
 import { Ionicons } from '@expo/vector-icons';
+import { ButtonVoltar } from '../../components/ButtonVoltar';
 
 
 export function Login() {
@@ -16,6 +17,9 @@ export function Login() {
 
     return (
         <View style={styles.container}>
+            <View style={styles.buttonVoltar}>
+                <ButtonVoltar />
+            </View>
 
             {/* view logo-title */}
             <View style={styles.align}>
@@ -50,8 +54,8 @@ export function Login() {
                             {hide ?
                                 <Ionicons name='eye' color={"#9089CB"} size={25} />
 
-                            :
-                            <Ionicons name='eye-off' color={"#9089CB"} size={25} />
+                                :
+                                <Ionicons name='eye-off' color={"#9089CB"} size={25} />
                             }
                         </TouchableOpacity>
                     </View>
