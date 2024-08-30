@@ -10,15 +10,15 @@ interface CustomBlocoProps {
     title: string;
     city: string;
     onPress: () => void;
-    image: ImageSourcePropType;
+    image: string; // URL da imagem
+    // image: ImageSourcePropType;
     preco: string;
 }
 
 export function BlocoAnuncioCliente({ namePrestador, title, onPress, image, preco, city }: CustomBlocoProps) {
     return (
         <View style={blocoAnuncioStyles.container}>
-
-            <Image style={blocoAnuncioStyles.image} source={image} />
+            <Image source={{ uri: image }} style={blocoAnuncioStyles.image} />
             <View style={blocoAnuncioStyles.textContainer}>
                 <Text style={blocoAnuncioStyles.description} numberOfLines={1}>
                     {title}
