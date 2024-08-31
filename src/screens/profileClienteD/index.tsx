@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { styles } from './styles';
 import { CustomButton } from '../../components/ButtonSM';
 import { ConfirmModal } from '../../components/ModalConfirmation';
+import { ButtonVoltar } from '../../components/ButtonVoltar';
 
 const nome = 'Danrlei de Lira Silva';
 const email = 'danrlei@gmail.com';
@@ -36,6 +37,10 @@ export function ProfileCliente() {
 
     return (
         <View style={styles.container}>
+            <View style={styles.buttonVoltar}>
+                <ButtonVoltar />
+            </View>
+
             {/* view das imagens */}
             <View style={styles.imageView}>
                 <Image 

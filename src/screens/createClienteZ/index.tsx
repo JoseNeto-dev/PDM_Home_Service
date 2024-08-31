@@ -3,14 +3,15 @@ import { styles } from './styles';
 import { CustomButton } from '../../components/ButtonXL';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { ButtonVoltar } from '../../components/ButtonVoltar';
 
 export function CreateCliente() {
 
     const navigation = useNavigation()
 
-    
+
     const cadastrar = () => {
-        navigation.navigate("Login") 
+        navigation.navigate("Login")
     };
 
     const [name, setName] = useState('');
@@ -19,9 +20,12 @@ export function CreateCliente() {
     const [phone, setPhone] = useState('');
     const [cpf, setCpf] = useState('');
     const [address, setAddress] = useState('');
-    
+
     return (
         <View style={styles.container}>
+            <View style={styles.buttonVoltar}>
+                <ButtonVoltar />
+            </View>
             <View style={styles.align}>
                 <Text style={styles.text}> Insira seus dados</Text>
                 <TextInput
@@ -68,13 +72,13 @@ export function CreateCliente() {
                 />
             </View>
             <View>
-                    <CustomButton
-                        title="Cadastrar"
-                        onPress={cadastrar}
-                        color='#564CAF'
-                        textColor='white'
-                    />
-                </View>
+                <CustomButton
+                    title="Cadastrar"
+                    onPress={cadastrar}
+                    color='#564CAF'
+                    textColor='white'
+                />
+            </View>
         </View>
     )
 }

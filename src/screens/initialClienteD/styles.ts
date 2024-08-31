@@ -7,12 +7,11 @@ container: {
   flex: 1,
   alignItems: 'center',
   justifyContent: 'center'
-
 },
 titleContainer: {
   width: '100%',
   alignItems: 'center',
-  marginTop: 130
+  marginTop: 140
 },
 title: {
   fontFamily: globalTheme.FONTS.bold,

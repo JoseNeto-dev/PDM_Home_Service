@@ -26,6 +26,12 @@ export const styles = StyleSheet.create({
     width: 140,
     height: 140,  
   },
+  buttonVoltar: {
+    position: 'absolute', // Remove o botão do fluxo normal
+    top: "5%", // Ajuste este valor para posicionar o botão mais alto ou mais baixo na tela
+    left: 15, // Ajuste este valor para posicionar o botão mais à esquerda
+    zIndex: 1, // Garante que o botão fique sobre outros elementos, se necessário
+},
   input:{
     height:56,
     width: 350,

@@ -11,7 +11,7 @@ export function CreatePrestador() {
 
     const navigation = useNavigation()
 
-    
+
     const cadastrar = () => {
         navigation.navigate("Login");
         handleSave();
@@ -78,90 +78,93 @@ export function CreatePrestador() {
 
 
     return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            style={styles.container}>
+        <View>
+
             <View style={styles.buttonVoltar}>
                 <ButtonVoltar />
             </View>
-            <ScrollView
-                showsVerticalScrollIndicator={false} // Oculta a barra de rolagem vertical
-                showsHorizontalScrollIndicator={false} // Oculta a barra de rolagem horizontal
-                keyboardShouldPersistTaps='handled'
-            >
-                <View style={styles.align}>
-                    <Text style={styles.text}>Insira seus dados</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Nome completo'
-                        placeholderTextColor='#9089CB'
-                        onChangeText={(text) => setName(text)}
-                        value={name}
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Email'
-                        placeholderTextColor='#9089CB'
-                        onChangeText={(text) => setEmail(text)}
-                        value={email}
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Senha'
-                        placeholderTextColor='#9089CB'
-                        onChangeText={(text) => setPassword(text)}
-                        value={password}
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Telefone'
-                        placeholderTextColor='#9089CB'
-                        onChangeText={(text) => setPhone(text)}
-                        value={phone}
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder='CNPJ       '
-                        placeholderTextColor='#9089CB'
-                        onChangeText={(text) => setCpf(text)}
-                        value={cpf}
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Endereço'
-                        placeholderTextColor='#9089CB'
-                        onChangeText={(text) => setAddress(text)}
-                        value={address}
-                    />
-                    <View style={styles.mapContainer}>
-                        <MapView
-                            style={styles.map}
-                            initialRegion={{
-                                latitude: markerCoordinate.latitude,
-                                longitude: markerCoordinate.longitude,
-                                latitudeDelta: 0.0922,
-                                longitudeDelta: 0.0421,
-                            }}
-                        >
-                            <Marker
-                                coordinate={markerCoordinate}
-                                draggable
-                                onDragEnd={handleMarkerDragEnd} // Atualiza a posição quando arrastado
-                            />
-                        </MapView>
-                    </View>
-                    <View style={{
-                        margin: 10
-                    }}>
-                        <CustomButton
-                            title="Cadastrar"
-                            onPress={cadastrar}
-                            color='#564CAF'
-                            textColor='white'
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                style={styles.container}>
+                <ScrollView
+                    showsVerticalScrollIndicator={false} // Oculta a barra de rolagem vertical
+                    showsHorizontalScrollIndicator={false} // Oculta a barra de rolagem horizontal
+                    keyboardShouldPersistTaps='handled'
+                >
+                    <View style={styles.align}>
+                        <Text style={styles.text}>Insira seus dados</Text>
+                        <TextInput
+                            style={styles.input}
+                            placeholder='Nome completo'
+                            placeholderTextColor='#9089CB'
+                            onChangeText={(text) => setName(text)}
+                            value={name}
                         />
+                        <TextInput
+                            style={styles.input}
+                            placeholder='Email'
+                            placeholderTextColor='#9089CB'
+                            onChangeText={(text) => setEmail(text)}
+                            value={email}
+                        />
+                        <TextInput
+                            style={styles.input}
+                            placeholder='Senha'
+                            placeholderTextColor='#9089CB'
+                            onChangeText={(text) => setPassword(text)}
+                            value={password}
+                        />
+                        <TextInput
+                            style={styles.input}
+                            placeholder='Telefone'
+                            placeholderTextColor='#9089CB'
+                            onChangeText={(text) => setPhone(text)}
+                            value={phone}
+                        />
+                        <TextInput
+                            style={styles.input}
+                            placeholder='CNPJ       '
+                            placeholderTextColor='#9089CB'
+                            onChangeText={(text) => setCpf(text)}
+                            value={cpf}
+                        />
+                        <TextInput
+                            style={styles.input}
+                            placeholder='Endereço'
+                            placeholderTextColor='#9089CB'
+                            onChangeText={(text) => setAddress(text)}
+                            value={address}
+                        />
+                        <View style={styles.mapContainer}>
+                            <MapView
+                                style={styles.map}
+                                initialRegion={{
+                                    latitude: markerCoordinate.latitude,
+                                    longitude: markerCoordinate.longitude,
+                                    latitudeDelta: 0.0922,
+                                    longitudeDelta: 0.0421,
+                                }}
+                            >
+                                <Marker
+                                    coordinate={markerCoordinate}
+                                    draggable
+                                    onDragEnd={handleMarkerDragEnd} // Atualiza a posição quando arrastado
+                                />
+                            </MapView>
+                        </View>
+                        <View style={{
+                            margin: 10
+                        }}>
+                            <CustomButton
+                                title="Cadastrar"
+                                onPress={cadastrar}
+                                color='#564CAF'
+                                textColor='white'
+                            />
+                        </View>
                     </View>
-                </View>
-            </ScrollView>
-        </KeyboardAvoidingView>
+                </ScrollView>
+            </KeyboardAvoidingView>
+        </View>
     );
 }

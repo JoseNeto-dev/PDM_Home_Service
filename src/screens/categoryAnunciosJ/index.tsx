@@ -16,7 +16,6 @@ export function CategoriaEscolhida() {
             namePrestador: 'Jaqueline Pereira da Silva',
             preco: 'R$ 400,00',
             title: 'Lavagem de roupa - Pesada',
-            image: require('../../../assets/maquina-de-lavar.png'),
             city: 'São José de Piranhas'
         },
         {
@@ -24,7 +23,6 @@ export function CategoriaEscolhida() {
             namePrestador: 'Maria Clara Almeida',
             preco: 'R$ 350,00',
             title: 'Cuidadora de idoso',
-            image: require('../../../assets/mulher-velha.png'),
             city: 'São José de Piranhas'
         },
         {
@@ -32,7 +30,6 @@ export function CategoriaEscolhida() {
             namePrestador: 'Carlos Henrique dos Santos',
             preco: 'R$ 500,00',
             title: 'Reforma de Banheiro',
-            image: require('../../../assets/parede-de-tijolos.png'),
             city: 'São José de Piranhas'
         },
         {
@@ -40,7 +37,6 @@ export function CategoriaEscolhida() {
             namePrestador: 'Paulo Roberto Lima',
             preco: 'R$ 250,00',
             title: 'Fisioterapeuta',
-            image: require('../../../assets/fisioterapia.png'),
             city: 'São José de Piranhas'
         },
         {
@@ -48,7 +44,6 @@ export function CategoriaEscolhida() {
             namePrestador: 'Ana Beatriz Souza',
             preco: 'R$ 450,00',
             title: 'Cozinheira',
-            image: require('../../../assets/chefe-de-cozinha.png'),
             city: 'São José de Piranhas'
         },
         {
@@ -56,7 +51,6 @@ export function CategoriaEscolhida() {
             namePrestador: 'Rodrigo Fernandes da Silva',
             preco: 'R$ 300,00',
             title: 'Jardinagem e Paisagismo',
-            image: require('../../../assets/crescer-planta.png'),
             city: 'São José de Piranhas'
         },
         {
@@ -64,7 +58,6 @@ export function CategoriaEscolhida() {
             namePrestador: 'Luciana Pereira dos Anjos',
             preco: 'R$ 550,00',
             title: 'Baba',
-            image: require('../../../assets/chupeta.png'),
             city: 'São José de Piranhas'
         },
         {
@@ -72,7 +65,6 @@ export function CategoriaEscolhida() {
             namePrestador: 'Felipe Augusto Ribeiro',
             preco: 'R$ 600,00',
             title: 'Instalação Elétrica Residencial',
-            image: require('../../../assets/eletricidade.png'),
             city: 'São José de Piranhas'
         },
         // Adicione mais itens se necessário

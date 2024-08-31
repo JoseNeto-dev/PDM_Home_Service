@@ -13,15 +13,18 @@ export const styles = StyleSheet.create({
     gap:2
     
   },
-  buttonVoltar:{
-    alignSelf: 'flex-start',
-    marginLeft: 15,
-  },
+  buttonVoltar: {
+    position: 'absolute', // Remove o botão do fluxo normal
+    top: "5%", // Ajuste este valor para posicionar o botão mais alto ou mais baixo na tela
+    left: 15, // Ajuste este valor para posicionar o botão mais à esquerda
+    zIndex: 1, // Garante que o botão fique sobre outros elementos, se necessário
+},
   titleContainer: {
     width: '100%',
     alignItems: 'center',
     justifyContent:'center',
-    padding: 15,
+    paddingTop: 30,
+    paddingBottom: 10,
     fontSize: globalTheme.SIZE.xm,
     flexWrap: 'wrap', // Permite que o texto quebre a linha
     alignSelf: 'center', // Garante que a View seja centralizada na tela

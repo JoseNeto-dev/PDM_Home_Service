@@ -2,6 +2,7 @@ import { View, Text, Image, TextInput, Alert } from 'react-native';
 import {styles} from './styles';
 import { CustomButton } from '../../components/ButtonLG';
 import { useState } from 'react';
+import { ButtonVoltar } from '../../components/ButtonVoltar';
 
 export function UpdateCliente() {
     const handlePress = () => {
@@ -15,7 +16,11 @@ export function UpdateCliente() {
 
     return (
         <View style ={styles.container}>
+            <View style={styles.buttonVoltar}>
+                <ButtonVoltar />
+            </View>
             <View style = {styles.align}>
+
                 <Text style = {styles.text}>Edite seus dados</Text>
                 <TextInput
                     style={styles.input}

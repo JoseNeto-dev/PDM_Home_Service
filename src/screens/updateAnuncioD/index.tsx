@@ -1,23 +1,27 @@
 import { View, Text, Image, TextInput, Alert } from 'react-native';
-import {styles} from './styles';
+import { styles } from './styles';
 import { CustomButton } from '../../components/ButtonLG';
 import { useState } from 'react';
+import { ButtonVoltar } from '../../components/ButtonVoltar';
 
 export function UpdateAnuncio() {
     const handlePress = () => {
-        Alert.alert ('Left button pressed');
+        Alert.alert('Left button pressed');
     };
 
     const [titulo, setTitulo] = useState('');
     const [descricao, setDescricao] = useState('');
     const [preco, setPreco] = useState('');
     const [servico, setServico] = useState('');
-    const [categoria, setCategoria] = useState ('');
+    const [categoria, setCategoria] = useState('');
 
     return (
-        <View style ={styles.container}>
-            <View style = {styles.align}>
-                <Text style = {styles.text}>Editar Anúncio</Text>
+        <View style={styles.container}>
+            <View style={styles.buttonVoltar}>
+                <ButtonVoltar />
+            </View>
+            <View style={styles.align}>
+                <Text style={styles.text}>Editar Anúncio</Text>
                 <TextInput
                     style={styles.input}
                     placeholder='Título'
