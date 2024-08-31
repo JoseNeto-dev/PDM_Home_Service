@@ -21,7 +21,7 @@ const { Navigator, Screen } = createNativeStackNavigator()
 
 export function NavigationStack() {
     return(
-        <Navigator initialRouteName="CategoriaEscolhida" screenOptions={{headerShown: false}}>
+        <Navigator initialRouteName="ListAnuncios" screenOptions={{headerShown: false}}>
             <Screen name="Home" component={Home} />
             <Screen name="Login" component={Login} />
             <Screen name="SelectUser" component={SelectUser} />
