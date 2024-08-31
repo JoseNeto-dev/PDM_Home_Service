@@ -6,7 +6,8 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "postinstall": "node ./postInstall && node react-native-map-web-fix.js"
   },
   "dependencies": {
     "@expo-google-fonts/roboto": "^0.2.3",

@@ -7,24 +7,23 @@ export interface AnuncioCompletoDTO {
   dtAtualizacao: string;
   prestadorId: string;
   categoriaId: string;
-  fotoCategoria: string;
+  categoria: {
+    id: string;
+    servico: string;
+    icone: string;
+  };
   prestador: {
     cnpj: string;
     horarioDisponibilidade: string;
     usuarioIdPrestador: string;
     latitude: number;
     longitude: number;
-  }
-  usuario: {
-    id: string;
-    nome: string;
-    email: string;
-    telefone: string;
-    foto?: string; // Campo opcional
-  }
-  categoria: {
-    id: string;
-    servico: string;
-    icone: string;
-  }
+    usuario: {
+      id: string;
+      nome: string;
+      email: string;
+      telefone: string;
+      foto?: string; // Campo opcional
+    };
+  };
 }

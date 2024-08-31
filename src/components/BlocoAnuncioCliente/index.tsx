@@ -4,14 +4,12 @@ import { blocoAnuncioStyles } from "./styles"
 import { globalTheme } from '../../global/styles/themes';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
-
 interface CustomBlocoProps {
     namePrestador: string;
     title: string;
     city: string;
     onPress: () => void;
-    image: string; // URL da imagem
-    // image: ImageSourcePropType;
+    image: string;
     preco: string;
 }
 
@@ -24,10 +22,10 @@ export function BlocoAnuncioCliente({ namePrestador, title, onPress, image, prec
                     {title}
                 </Text>
                 <View style={blocoAnuncioStyles.textName}>
-                    <Text style={blocoAnuncioStyles.content} numberOfLines={1} >
+                    <Text style={blocoAnuncioStyles.content} numberOfLines={1}>
                         {namePrestador}
                     </Text>
-                    <Text style={blocoAnuncioStyles.content} numberOfLines={1} >
+                    <Text style={blocoAnuncioStyles.content} numberOfLines={1}>
                         {city}
                     </Text>
                     <Text style={blocoAnuncioStyles.content}>
@@ -36,12 +34,10 @@ export function BlocoAnuncioCliente({ namePrestador, title, onPress, image, prec
                 </View>
             </View>
             <View style={blocoAnuncioStyles.iconView}>
-                <TouchableOpacity onPress={() => console.log('Edit icon pressed')} style={blocoAnuncioStyles.icons}>
+                <TouchableOpacity onPress={onPress} style={blocoAnuncioStyles.icons}>
                     <FontAwesome name="whatsapp" size={20} color={globalTheme.COLORS.white} />
                 </TouchableOpacity>
-
             </View>
-
         </View>
     );
 }
