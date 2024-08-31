@@ -7,7 +7,6 @@ import { BlocoAnuncioCliente } from '../../components/BlocoAnuncioCliente';
 import { ButtonVoltar } from '../../components/ButtonVoltar';
 import { AnuncioCompletoDTO } from '../../dto/AnuncioCompletoDTO';
 
-
 export function ListAnuncios() {
     const [dadosAnuncios, setDadosAnuncios] = useState<AnuncioCompletoDTO[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -15,10 +14,11 @@ export function ListAnuncios() {
     const fetchAnuncios = async () => {
         try {
             setIsLoading(true);
-            const response = await api.get('/anunciosPrestador');
-            console.log('Dados recebidos da API:', response.data);  // Usando a instância `api`
+            const response = await api.get('/anuncios');
+            console.log('Dados recebidos da API:', response.data);
             setDadosAnuncios(response.data);
         } catch (error) {
+            console.error('Erro ao carregar anúncios:', error);
             Alert.alert('Erro', 'Não foi possível carregar os anúncios');
         } finally {
             setIsLoading(false);
@@ -54,21 +54,21 @@ export function ListAnuncios() {
                     showsVerticalScrollIndicator={false}
                     renderItem={({ item }) => (
                         <BlocoAnuncioCliente
-                            namePrestador={item.usuario.nome}
+                            namePrestador={item.prestador.usuario ? item.prestador.usuario.nome : 'Nome não disponível'}
                             onPress={handlePress}
                             preco={item.preco}
                             title={item.titulo}
-                            image={item.categoria.icone} 
-                            city={'Cajazeiras'}                            
+                            image={item.categoria.icone}
+                            city={'Cajazeiras'}
                         />
                     )}
                     keyExtractor={(item) => item.id}
                     contentContainerStyle={{
-                        alignItems: 'center', // Centraliza os itens na horizontal
-                        justifyContent: 'center', // Centraliza os itens na vertical
+                        alignItems: 'center',
+                        justifyContent: 'center',
                         paddingBottom: 20,
                     }}
-                    style={{ flex: 1 }} // Ocupará o espaço disponível da tela
+                    style={{ flex: 1 }}
                 />
             )}
         </View>
