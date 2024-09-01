@@ -8,18 +8,17 @@ import { ButtonVoltar } from '../../components/ButtonVoltar';
 import { AnuncioCompletoDTO } from '../../dto/AnuncioCompletoDTO';
 import { configIp } from '../../api/configIp';
 
-
-const replaceLocalhostWithIp = (url: string, ipAddress: string): string => {
-    return url.replace('localhost', ipAddress);
+const substituirLocalhostPorIp = (url: string, enderecoIp: string): string => {
+    return url.replace('localhost', enderecoIp);
 };
 
 export function ListAnuncios() {
     const [dadosAnuncios, setDadosAnuncios] = useState<AnuncioCompletoDTO[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const [carregando, setCarregando] = useState<boolean>(false);
 
-    const fetchAnuncios = async () => {
+    const buscarAnuncios = async () => {
         try {
-            setIsLoading(true);
+            setCarregando(true);
             const response = await api.get('/anuncios');
             console.log('Dados recebidos da API:', response.data);
             // Substituir localhost pelo IP da máquina
@@ -27,7 +26,7 @@ export function ListAnuncios() {
                 ...anuncio,
                 categoria: {
                     ...anuncio.categoria,
-                    icone: replaceLocalhostWithIp(anuncio.categoria.icone, configIp.apiBaseUrl),
+                    icone: substituirLocalhostPorIp(anuncio.categoria.icone, configIp.apiBaseUrl),
                 },
             }));
             console.log('Anúncios com IP:', anunciosComIp);
@@ -36,18 +35,18 @@ export function ListAnuncios() {
             console.error('Erro ao carregar anúncios:', error);
             Alert.alert('Erro', 'Não foi possível carregar os anúncios');
         } finally {
-            setIsLoading(false);
+            setCarregando(false);
         }
     };
 
     useFocusEffect(
         useCallback(() => {
-            fetchAnuncios();
+            buscarAnuncios();
         }, [])
     );
 
-    const handlePress = () => {
-        Alert.alert('Left button pressed');
+    const aoPressionar = () => {
+        Alert.alert('Direcionar para o whats');
     };
 
     return (
@@ -55,7 +54,7 @@ export function ListAnuncios() {
             <View style={styles.buttonVoltar}>
                 <ButtonVoltar />
             </View>
-            {isLoading ? (
+            {carregando ? (
                 <Text>Carregando...</Text>
             ) : (
                 <FlatList
@@ -70,7 +69,7 @@ export function ListAnuncios() {
                     renderItem={({ item }) => (
                         <BlocoAnuncioCliente
                             namePrestador={item.prestador.usuario ? item.prestador.usuario.nome : 'Nome não disponível'}
-                            onPress={handlePress}
+                            onPress={aoPressionar}
                             preco={item.preco}
                             title={item.titulo}
                             image={item.categoria.icone}
@@ -89,72 +88,3 @@ export function ListAnuncios() {
         </View>
     );
 }
-
-
-// export function ListAnuncios() {
-//     const [dadosAnuncios, setDadosAnuncios] = useState<AnuncioCompletoDTO[]>([]);
-//     const [isLoading, setIsLoading] = useState<boolean>(false);
-
-//     const fetchAnuncios = async () => {
-//         try {
-//             setIsLoading(true);
-//             const response = await api.get('/anuncios');
-//             console.log('Dados recebidos da API:', response.data);
-//             setDadosAnuncios(response.data);
-//         } catch (error) {
-//             console.error('Erro ao carregar anúncios:', error);
-//             Alert.alert('Erro', 'Não foi possível carregar os anúncios');
-//         } finally {
-//             setIsLoading(false);
-//         }
-//     };
-
-//     useFocusEffect(
-//         useCallback(() => {
-//             fetchAnuncios();
-//         }, [])
-//     );
-
-//     const handlePress = () => {
-//         Alert.alert('Left button pressed');
-//     };
-
-//     return (
-//         <View style={styles.container}>
-//             <View style={styles.buttonVoltar}>
-//                 <ButtonVoltar />
-//             </View>
-//             {isLoading ? (
-//                 <Text>Carregando...</Text>
-//             ) : (
-//                 <FlatList
-//                     data={dadosAnuncios}
-//                     ListHeaderComponent={
-//                         <View style={styles.titleContainer}>
-//                             <Text style={styles.title}>Todos os Anúncios</Text>
-//                             <Text style={styles.subtitle}>Encontre abaixo todos os anúncios cadastrados</Text>
-//                         </View>
-//                     }
-//                     showsVerticalScrollIndicator={false}
-//                     renderItem={({ item }) => (
-//                         <BlocoAnuncioCliente
-//                             namePrestador={item.prestador.usuario ? item.prestador.usuario.nome : 'Nome não disponível'}
-//                             onPress={handlePress}
-//                             preco={item.preco}
-//                             title={item.titulo}
-//                             image={item.categoria.icone}
-//                             city={'Cajazeiras'}
-//                         />
-//                     )}
-//                     keyExtractor={(item) => item.id}
-//                     contentContainerStyle={{
-//                         alignItems: 'center',
-//                         justifyContent: 'center',
-//                         paddingBottom: 20,
-//                     }}
-//                     style={{ flex: 1 }}
-//                 />
-//             )}
-//         </View>
-//     );
-// }

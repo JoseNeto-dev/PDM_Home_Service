@@ -1,76 +1,73 @@
 import { View, Text, Image, Button, Alert, FlatList } from 'react-native';
 import { styles } from './styles';
-import { CustomButton } from '../../components/ButtonXL';
 import { BlocoAnuncioCliente } from '../../components/BlocoAnuncioCliente';
-import AntDesign from '@expo/vector-icons/AntDesign';
-import { globalTheme } from '../../global/styles/themes';
 import { ButtonVoltar } from '../../components/ButtonVoltar';
-
-
+import { useCallback, useEffect, useState } from 'react';
+import { AnuncioCompletoDTO } from '../../dto/AnuncioCompletoDTO';
+import { api } from '../../api';
+import { configIp } from '../../api/configIp';
+import { useFocusEffect } from '@react-navigation/native';
 
 export function CategoriaEscolhida() {
-    const categoria = 'Diarista'
-    const dadosAnuncios = [
-        {
-            id: '1',
-            namePrestador: 'Jaqueline Pereira da Silva',
-            preco: 'R$ 400,00',
-            title: 'Lavagem de roupa - Pesada',
-            city: 'São José de Piranhas'
-        },
-        {
-            id: '3',
-            namePrestador: 'Maria Clara Almeida',
-            preco: 'R$ 350,00',
-            title: 'Cuidadora de idoso',
-            city: 'São José de Piranhas'
-        },
-        {
-            id: '4',
-            namePrestador: 'Carlos Henrique dos Santos',
-            preco: 'R$ 500,00',
-            title: 'Reforma de Banheiro',
-            city: 'São José de Piranhas'
-        },
-        {
-            id: '5',
-            namePrestador: 'Paulo Roberto Lima',
-            preco: 'R$ 250,00',
-            title: 'Fisioterapeuta',
-            city: 'São José de Piranhas'
-        },
-        {
-            id: '6',
-            namePrestador: 'Ana Beatriz Souza',
-            preco: 'R$ 450,00',
-            title: 'Cozinheira',
-            city: 'São José de Piranhas'
-        },
-        {
-            id: '7',
-            namePrestador: 'Rodrigo Fernandes da Silva',
-            preco: 'R$ 300,00',
-            title: 'Jardinagem e Paisagismo',
-            city: 'São José de Piranhas'
-        },
-        {
-            id: '8',
-            namePrestador: 'Luciana Pereira dos Anjos',
-            preco: 'R$ 550,00',
-            title: 'Baba',
-            city: 'São José de Piranhas'
-        },
-        {
-            id: '9',
-            namePrestador: 'Felipe Augusto Ribeiro',
-            preco: 'R$ 600,00',
-            title: 'Instalação Elétrica Residencial',
-            city: 'São José de Piranhas'
-        },
-        // Adicione mais itens se necessário
-    ];
+    const [dadosAnuncios, setDadosAnuncios] = useState<AnuncioCompletoDTO[]>([]);
+    const [carregando, setCarregando] = useState<boolean>(true);
+    const [nomeCategoria, setNomeCategoria] = useState<string>('');
+    const [idCategoria, setIdCategoria] = useState<string>('');
+
+    // Função para substituir 'localhost' pelo IP da máquina (se necessário)
+    const substituirLocalhostPorIp = (url: string, enderecoIp: string): string => {
+        return url.replace('localhost', enderecoIp);
+    };
+
+    useEffect(() => {
+        // Aqui você pode definir o idCategoria a partir de props ou outras fontes
+        setIdCategoria('a8b6db1f-43d7-4352-baab-8c7826175447');
+    }, []);
+
+    const buscarAnuncios = async () => {
+        try {
+            // Note que a URL agora inclui o idCategoria diretamente como parte da URL
+            const response = await api.get<AnuncioCompletoDTO[]>(`/anunciosCategoria/${idCategoria}`);
+            const anunciosComIp = response.data.map((anuncio) => ({
+                ...anuncio,
+                categoria: {
+                    ...anuncio.categoria,
+                    icone: substituirLocalhostPorIp(anuncio.categoria.icone, configIp.apiBaseUrl), // Substitua pelo IP correto
+                },
+                prestador: {
+                    ...anuncio.prestador,
+                    usuario: {
+                        ...anuncio.prestador.usuario,
+                        foto: anuncio.prestador.usuario.foto 
+                            ? substituirLocalhostPorIp(anuncio.prestador.usuario.foto, configIp.apiBaseUrl)
+                            : undefined,
+                    },
+                },
+            }));
+            setDadosAnuncios(anunciosComIp);
+
+            // Definindo o nome da categoria com base no primeiro anúncio carregado
+            if (anunciosComIp.length > 0) {
+                setNomeCategoria(anunciosComIp[0].categoria.servico);
+            }
+        } catch (error) {
+            console.error('Erro ao carregar anúncios:', error);
+            Alert.alert('Erro', 'Não foi possível carregar os anúncios');
+        } finally {
+            setCarregando(false);
+        }
+    };
+
+    useFocusEffect(
+        useCallback(() => {
+            if (idCategoria) { // Certifique-se de que idCategoria não está vazio antes de buscar os anúncios
+                buscarAnuncios();
+            }
+        }, [idCategoria])
+    );
+
     const handlePress = () => {
-        Alert.alert('Left button pressed');
+        Alert.alert('Botão de WhatsApp pressionado');
     };
 
     return (
@@ -78,34 +75,37 @@ export function CategoriaEscolhida() {
             <View style={styles.buttonVoltar}>
                 <ButtonVoltar />
             </View>
-            <FlatList
-                data={dadosAnuncios}
-                ListHeaderComponent={
-                    <View style={styles.titleContainer}>
-                        <Text style={styles.title}>{categoria}</Text>
-                        <Text style={styles.subtitle}> Encontre abaixo os anúncios desta categoria</Text>
-                    </View>
-                }
-                showsVerticalScrollIndicator={false}
-                renderItem={({ item }) => (
-                    <BlocoAnuncioCliente
-                        namePrestador={item.namePrestador}
-                        onPress={handlePress}
-                        preco={item.preco}
-                        title={item.title}
-                        image={item.image}
-                        city={item.city}
-                    />
-                )}
-                keyExtractor={(item) => item.id}
-                contentContainerStyle={{
-                    alignItems: 'center', // Centraliza os itens na horizontal
-                    justifyContent: 'center', // Centraliza os itens na vertical
-                    paddingBottom: 20,
-                }}
-                style={{ flex: 1 }} // Ocupará o espaço disponível da tela
-            />
+            {carregando ? (
+                <Text>Carregando...</Text>
+            ) : (
+                <FlatList
+                    data={dadosAnuncios}
+                    ListHeaderComponent={
+                        <View style={styles.titleContainer}>
+                            <Text style={styles.title}>{nomeCategoria}</Text>
+                            <Text style={styles.subtitle}>Encontre abaixo os anúncios desta categoria</Text>
+                        </View>
+                    }
+                    showsVerticalScrollIndicator={false}
+                    renderItem={({ item }) => (
+                        <BlocoAnuncioCliente
+                            namePrestador={item.prestador.usuario.nome}
+                            onPress={handlePress}
+                            preco={item.preco}
+                            title={item.titulo}
+                            image={item.categoria.icone}
+                            city={'São José de Piranhas'} // Substitua pelo valor real se disponível
+                        />
+                    )}
+                    keyExtractor={(item) => item.id}
+                    contentContainerStyle={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        paddingBottom: 20,
+                    }}
+                    style={{ flex: 1 }}
+                />
+            )}
         </View>
-
-    )
+    );
 }
