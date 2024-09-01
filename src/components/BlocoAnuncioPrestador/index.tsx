@@ -12,7 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 interface CustomBlocoProps {
     namePrestador: string;
     title: string;
-    image: ImageSourcePropType;
+    image: string;
     preco: string;
 }
 
@@ -36,8 +36,7 @@ export function BlocoAnuncioPrestador({ namePrestador, title, image, preco }: Cu
 
     return (
         <View style={blocoAnuncioStyles.container}>
-
-            <Image style={blocoAnuncioStyles.image} source={image} />
+            <Image source={{ uri: image }} style={blocoAnuncioStyles.image} />
             <View style={blocoAnuncioStyles.textContainer}>
                 <Text style={blocoAnuncioStyles.description} numberOfLines={1}>
                     {title}
