@@ -11,14 +11,14 @@ interface CustomBlocoInfoProps {
     email: string;
     city: string;
     onPress: () => void;
-    image: ImageSourcePropType;
+    image?: string;
 }
 
 export function BlocoInformationPrestador({ namePrestador, email, onPress, image, city }: CustomBlocoInfoProps) {
     return (
         <View style={blocoAnuncioStyles.container}>
 
-            <Image style={blocoAnuncioStyles.image} source={image} />
+            <Image source={{ uri: image }} style={blocoAnuncioStyles.image} />
             <View style={blocoAnuncioStyles.textContainer}>
                 <Text numberOfLines={1}>
                     <Text style={blocoAnuncioStyles.description}>Nome: </Text>

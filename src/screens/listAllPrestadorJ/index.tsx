@@ -1,74 +1,39 @@
 import { View, Text, Image, Button, Alert, FlatList } from 'react-native';
 import { styles } from './styles';
-import { CustomButton } from '../../components/ButtonXL';
-import AntDesign from '@expo/vector-icons/AntDesign';
-import { globalTheme } from '../../global/styles/themes';
 import { BlocoInformationPrestador } from '../../components/BlocoPrestadorCliente';
 import { ButtonVoltar } from '../../components/ButtonVoltar';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useCallback, useState } from 'react';
+import { PrestadorDTO } from '../../dto/PrestadorDto';
+import { api } from '../../api';
+import { configIp } from '../../api/config/configIp';
+import { processarPrestador } from '../../api/config/converterIP';
 
 
 
 export function ListPrestadores() {
-    const dadosPrestador = [
-        {
-            id: '1',
-            namePrestador: 'Jaqueline Pereira da Silva',
-            email: 'jaqu@gmail.com',
-            image: require('../../../assets/jesus.png'),
-            city: 'São José de Piranhas',
-            
-        },
-        {
-            id: '3',
-            namePrestador: 'Maria Clara Almeida',
-            email: 'mariaC@gmail.com',
-            image: require('../../../assets/profileIcon.png'),
-            city: 'São José de Piranhas'
-        },
-        {
-            id: '4',
-            namePrestador: 'Carlos Henrique dos Santos',
-            email: 'carlos@gmail.com',
-            image: require('../../../assets/profileIcon.png'),
-            city: 'São José de Piranhas'
-        },
-        {
-            id: '5',
-            namePrestador: 'Paulo Roberto Lima',
-            email: 'paulo@gmail.com',
-            image: require('../../../assets/profileIcon.png'),
-            city: 'São José de Piranhas'
-        },
-        {
-            id: '6',
-            namePrestador: 'Ana Beatriz Souza',
-            email: 'ana@gmail.com',
-            image: require('../../../assets/profileIcon.png'),
-            city: 'São José de Piranhas'
-        },
-        {
-            id: '7',
-            namePrestador: 'Rodrigo Fernandes da Silva',
-            email: 'rodrigo@gmail.com',
-            image: require('../../../assets/profileIcon.png'),
-            city: 'São José de Piranhas'
-        },
-        {
-            id: '8',
-            namePrestador: 'Luciana Pereira dos Anjos',
-            email: 'lu@gmail.com',
-            image: require('../../../assets/profileIcon.png'),
-            city: 'São José de Piranhas'
-        },
-        {
-            id: '9',
-            namePrestador: 'Felipe Augusto Ribeiro',
-            email: 'felipe@gmail.com',
-            image: require('../../../assets/profileIcon.png'),
-            city: 'São José de Piranhas'
-        },
-        // Adicione mais itens se necessário
-    ];
+    const navigation = useNavigation();
+    const [dadosPrestador, setDadosPrestador] = useState<PrestadorDTO[]>([]);
+    const [carregando, setCarregando] = useState<boolean>(true);
+
+    const buscarPrestadores = async () => {
+        try {
+          const response = await api.get<PrestadorDTO[]>('/prestador');
+          const prestadorComIp = processarPrestador(response.data, configIp.apiBaseUrl);
+          setDadosPrestador(prestadorComIp);
+        } catch (error) {
+          console.error('Erro ao carregar anúncios:', error);
+          Alert.alert('Erro', 'Não foi possível carregar os prestadores');
+        } finally {
+          setCarregando(false);
+        }
+      };
+      useFocusEffect(
+        useCallback(() => {
+          buscarPrestadores();
+        }, [])
+      );
+
     const handlePress = () => {
         Alert.alert('Left button pressed');
     };
@@ -90,11 +55,11 @@ export function ListPrestadores() {
                 showsVerticalScrollIndicator={false}
                 renderItem={({ item }) => (
                     <BlocoInformationPrestador
-                        namePrestador={item.namePrestador}
+                        namePrestador={item.nome}
                         onPress={handlePress}
                         email= {item.email}
-                        image={item.image}
-                        city={item.city}
+                        image={item.foto}
+                        city={"São José de Piranhas"}
                     />
                 )}
                 keyExtractor={(item) => item.id}

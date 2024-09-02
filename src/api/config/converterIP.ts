@@ -1,4 +1,5 @@
 import { AnuncioCompletoDTO } from "../../dto/AnuncioCompletoDTO";
+import { PrestadorDTO } from "../../dto/PrestadorDto";
 
 const substituirLocalhostPorIp = (url: string, enderecoIp: string): string => {
     return url.replace('localhost', enderecoIp);
@@ -20,5 +21,14 @@ const substituirLocalhostPorIp = (url: string, enderecoIp: string): string => {
             : undefined,
         },
       },
+    }));
+  };
+
+  export const processarPrestador = (prestadores: PrestadorDTO[], enderecoIp: string): PrestadorDTO[] => {
+    return prestadores.map((prestador) => ({
+      ...prestador,
+      foto: prestador.foto
+        ? substituirLocalhostPorIp(prestador.foto, enderecoIp)
+        : undefined,
     }));
   };
