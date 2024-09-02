@@ -8,7 +8,8 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
 import { AnuncioCompletoDTO } from '../../dto/AnuncioCompletoDTO';
 import { api } from '../../api';
-import { configIp } from '../../api/configIp';
+import { configIp } from '../../api/config/configIp';
+import { processarAnuncios } from '../../api/config/converterIP';
 
 export function InitialPrestador() {
     const navigation = useNavigation();
@@ -18,22 +19,7 @@ export function InitialPrestador() {
     const buscarAnuncios = async () => {
       try {
         const response = await api.get<AnuncioCompletoDTO[]>('/anunciosPrestador');
-        const anunciosComIp = response.data.map((anuncio) => ({
-          ...anuncio,
-          categoria: {
-            ...anuncio.categoria,
-            icone: substituirLocalhostPorIp(anuncio.categoria.icone, configIp.apiBaseUrl),
-          },
-          prestador: {
-            ...anuncio.prestador,
-            usuario: {
-              ...anuncio.prestador.usuario,
-              foto: anuncio.prestador.usuario.foto 
-                ? substituirLocalhostPorIp(anuncio.prestador.usuario.foto, configIp.apiBaseUrl)
-                : undefined,
-            },
-          },
-        }));
+        const anunciosComIp = processarAnuncios(response.data, configIp.apiBaseUrl);
         setDadosAnuncios(anunciosComIp);
       } catch (error) {
         console.error('Erro ao carregar anúncios:', error);
@@ -51,12 +37,7 @@ export function InitialPrestador() {
   
     const criarAnuncio = () => {
       navigation.navigate('CreateAnuncio');
-    };
-  
-    const substituirLocalhostPorIp = (url: string, enderecoIp: string): string => {
-      return url.replace('localhost', enderecoIp);
-    };
-  
+    };  
     return (
       <View style={styles.container}>
         <Header image={require('../../../assets/jesus.png')} key={2} />

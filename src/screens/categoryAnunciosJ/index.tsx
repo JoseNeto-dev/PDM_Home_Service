@@ -5,8 +5,9 @@ import { ButtonVoltar } from '../../components/ButtonVoltar';
 import { useCallback, useEffect, useState } from 'react';
 import { AnuncioCompletoDTO } from '../../dto/AnuncioCompletoDTO';
 import { api } from '../../api';
-import { configIp } from '../../api/configIp';
+import { configIp } from '../../api/config/configIp';
 import { useFocusEffect } from '@react-navigation/native';
+import { processarAnuncios } from '../../api/config/converterIP';
 
 export function CategoriaEscolhida() {
     const [dadosAnuncios, setDadosAnuncios] = useState<AnuncioCompletoDTO[]>([]);
@@ -14,36 +15,16 @@ export function CategoriaEscolhida() {
     const [nomeCategoria, setNomeCategoria] = useState<string>('');
     const [idCategoria, setIdCategoria] = useState<string>('');
 
-    // Função para substituir 'localhost' pelo IP da máquina (se necessário)
-    const substituirLocalhostPorIp = (url: string, enderecoIp: string): string => {
-        return url.replace('localhost', enderecoIp);
-    };
-
     useEffect(() => {
         // Aqui você pode definir o idCategoria a partir de props ou outras fontes
-        setIdCategoria('a8b6db1f-43d7-4352-baab-8c7826175447');
+        setIdCategoria('545210f7-be81-43a5-a03c-f3f06d30f621');
     }, []);
 
     const buscarAnuncios = async () => {
         try {
             // Note que a URL agora inclui o idCategoria diretamente como parte da URL
             const response = await api.get<AnuncioCompletoDTO[]>(`/anunciosCategoria/${idCategoria}`);
-            const anunciosComIp = response.data.map((anuncio) => ({
-                ...anuncio,
-                categoria: {
-                    ...anuncio.categoria,
-                    icone: substituirLocalhostPorIp(anuncio.categoria.icone, configIp.apiBaseUrl), // Substitua pelo IP correto
-                },
-                prestador: {
-                    ...anuncio.prestador,
-                    usuario: {
-                        ...anuncio.prestador.usuario,
-                        foto: anuncio.prestador.usuario.foto 
-                            ? substituirLocalhostPorIp(anuncio.prestador.usuario.foto, configIp.apiBaseUrl)
-                            : undefined,
-                    },
-                },
-            }));
+            const anunciosComIp = processarAnuncios(response.data, configIp.apiBaseUrl);
             setDadosAnuncios(anunciosComIp);
 
             // Definindo o nome da categoria com base no primeiro anúncio carregado

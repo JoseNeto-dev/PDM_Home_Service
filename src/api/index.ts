@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { configIp } from './configIp';
+import { configIp } from './config/configIp';
 
 const baseURL = `http://${configIp.apiBaseUrl}:3005`;
 
@@ -12,7 +12,7 @@ export const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     // Simulando o token e o email pois ainda não está usando o contexto API
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU2ZTdhNmRlLTg4ZjUtNGM2MS05Y2YyLTgzYTdmNmIwOTc2OSIsImlhdCI6MTcyNTIyMTIyMCwiZXhwIjoxNzI1MzA3NjIwLCJzdWIiOiI1NmU3YTZkZS04OGY1LTRjNjEtOWNmMi04M2E3ZjZiMDk3NjkifQ.sQXcDsGeTQqFOsnCamQNYF_lzB1lODPWYnndSneJaQE";
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhNWE1NGUyLTkyYzQtNDAxNy1hM2NlLWU5ZTU4ZmVjZTYxZSIsImlhdCI6MTcyNTI4MTM3NCwiZXhwIjoxNzI1MzY3Nzc0LCJzdWIiOiI1YTVhNTRlMi05MmM0LTQwMTctYTNjZS1lOWU1OGZlY2U2MWUifQ.NFKZiUW7YFLGm_W_xC-7FJrNgPnEGDWLt6xkXZhIOkA";
     const email = "joyce@gmail.com"; // Substitua pelo email do prestador autenticado
 
     if (token) {

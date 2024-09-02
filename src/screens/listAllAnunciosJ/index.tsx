@@ -6,11 +6,9 @@ import { styles } from './styles';
 import { BlocoAnuncioCliente } from '../../components/BlocoAnuncioCliente';
 import { ButtonVoltar } from '../../components/ButtonVoltar';
 import { AnuncioCompletoDTO } from '../../dto/AnuncioCompletoDTO';
-import { configIp } from '../../api/configIp';
+import { configIp } from '../../api/config/configIp';
+import { processarAnuncios } from '../../api/config/converterIP';
 
-const substituirLocalhostPorIp = (url: string, enderecoIp: string): string => {
-    return url.replace('localhost', enderecoIp);
-};
 
 export function ListAnuncios() {
     const [dadosAnuncios, setDadosAnuncios] = useState<AnuncioCompletoDTO[]>([]);
@@ -20,15 +18,7 @@ export function ListAnuncios() {
         try {
             setCarregando(true);
             const response = await api.get('/anuncios');
-            console.log('Dados recebidos da API:', response.data);
-            // Substituir localhost pelo IP da máquina
-            const anunciosComIp = response.data.map((anuncio: AnuncioCompletoDTO) => ({
-                ...anuncio,
-                categoria: {
-                    ...anuncio.categoria,
-                    icone: substituirLocalhostPorIp(anuncio.categoria.icone, configIp.apiBaseUrl),
-                },
-            }));
+            const anunciosComIp = processarAnuncios(response.data, configIp.apiBaseUrl);
             console.log('Anúncios com IP:', anunciosComIp);
             setDadosAnuncios(anunciosComIp);
         } catch (error) {
