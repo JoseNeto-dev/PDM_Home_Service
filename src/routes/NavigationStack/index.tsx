@@ -22,7 +22,7 @@ const { Navigator, Screen } = createNativeStackNavigator()
 
 export function NavigationStack() {
     return(
-        <Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
+        <Navigator initialRouteName="UpdateProfile" screenOptions={{headerShown: false}}>
             <Screen name="Home" component={Home} />
             <Screen name="Login" component={Login} />
             <Screen name="SelectUser" component={SelectUser} />
