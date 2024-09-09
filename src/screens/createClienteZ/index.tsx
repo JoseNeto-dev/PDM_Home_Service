@@ -4,14 +4,40 @@ import { CustomButton } from '../../components/ButtonXL';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { ButtonVoltar } from '../../components/ButtonVoltar';
+import { api } from '../../api';
+import { ClienteDTO } from '../../dto/ClienteDTO';
 
 export function CreateCliente() {
 
-    const navigation = useNavigation()
+    const navigation = useNavigation();
 
+    const criarCliente = async () => {
+        try {
+            const cliente: ClienteDTO = {
+                nome: name,
+                email: email,
+                senha: password,
+                telefone: phone,
+                cpf: cpf,
+                endereco: address
+            };
 
-    const cadastrar = () => {
-        navigation.navigate("Login")
+            // Enviando o cliente para a API
+            const response = await api.post('/cliente', cliente);
+
+            if (response.status === 201) {
+                console.log('Cliente cadastrado com sucesso!');
+                Alert.alert('Cliente cadastrado com sucesso!');
+                navigation.navigate("Login"); // Navega para a tela de login após sucesso
+            }
+        } catch (error: any) {
+            // Exibindo uma mensagem de erro apropriada
+            if (error.response && error.response.data && error.response.data.error) {
+                Alert.alert('Erro', error.response.data.error);
+            } else {
+                Alert.alert('Erro', 'Ocorreu um erro ao tentar cadastrar o cliente.');
+            }
+        }
     };
 
     const [name, setName] = useState('');
@@ -74,7 +100,7 @@ export function CreateCliente() {
             <View>
                 <CustomButton
                     title="Cadastrar"
-                    onPress={cadastrar}
+                    onPress={criarCliente}
                     color='#564CAF'
                     textColor='white'
                 />

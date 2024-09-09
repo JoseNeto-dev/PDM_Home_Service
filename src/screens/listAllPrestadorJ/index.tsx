@@ -4,7 +4,7 @@ import { BlocoInformationPrestador } from '../../components/BlocoPrestadorClient
 import { ButtonVoltar } from '../../components/ButtonVoltar';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
-import { PrestadorDTO } from '../../dto/PrestadorDto';
+import { PrestadorDTO } from '../../dto/GetPrestadorDTO';
 import { api } from '../../api';
 import { configIp } from '../../api/config/configIp';
 import { processarPrestador } from '../../api/config/converterIP';

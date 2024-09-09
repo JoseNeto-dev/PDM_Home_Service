@@ -1,5 +1,5 @@
 import { AnuncioCompletoDTO } from "../../dto/AnuncioCompletoDTO";
-import { PrestadorDTO } from "../../dto/PrestadorDto";
+import { PrestadorDTO } from "../../dto/GetPrestadorDTO";
 
 const substituirLocalhostPorIp = (url: string, enderecoIp: string): string => {
     return url.replace('localhost', enderecoIp);

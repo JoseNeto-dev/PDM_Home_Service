@@ -12,7 +12,7 @@ export const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     // Simulando o token e o email pois ainda não está usando o contexto API
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhNWE1NGUyLTkyYzQtNDAxNy1hM2NlLWU5ZTU4ZmVjZTYxZSIsImlhdCI6MTcyNTI4MTM3NCwiZXhwIjoxNzI1MzY3Nzc0LCJzdWIiOiI1YTVhNTRlMi05MmM0LTQwMTctYTNjZS1lOWU1OGZlY2U2MWUifQ.NFKZiUW7YFLGm_W_xC-7FJrNgPnEGDWLt6xkXZhIOkA";
+    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjczY2E5ZjdhLTZkOWItNGNjZi05YTg1LTViNGJlZDJhMTIxNyIsImlhdCI6MTcyNTg5OTgzNSwiZXhwIjoxNzI1OTg2MjM1LCJzdWIiOiI3M2NhOWY3YS02ZDliLTRjY2YtOWE4NS01YjRiZWQyYTEyMTcifQ.Ple4x2M0wOko-AoHBYrcqnN0sPMeOKxri2oCmPcViwc";
     const email = "joyce@gmail.com"; // Substitua pelo email do prestador autenticado
 
     if (token) {
