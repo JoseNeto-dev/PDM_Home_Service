@@ -46,8 +46,7 @@ export function ListAnuncios() {
             </View>
             {carregando ? (
                 <Text>Carregando...</Text>
-            ) : (
-                <FlatList
+            ) : (<FlatList
                     data={dadosAnuncios}
                     ListHeaderComponent={
                         <View style={styles.titleContainer}>

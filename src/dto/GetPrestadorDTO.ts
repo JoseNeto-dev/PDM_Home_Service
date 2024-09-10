@@ -7,7 +7,7 @@ export interface PrestadorDTO {
     prestador: {
         cnpj: string;
         horarioDisponibilidade: string;
-        latitude: number;
-        longitude: number;
+        latitude?: number;
+        longitude?: number;
     };
 }

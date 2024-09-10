@@ -1,21 +1,59 @@
-import { View, Image, Button, Alert, ViewStyle } from 'react-native';
+import { View, Image, Alert, ViewStyle } from 'react-native';
+import { useCallback } from 'react'
+import { useFocusEffect } from '@react-navigation/native';
 import { styles } from './styles'
 import { Divider, Text } from 'react-native-paper';
 import { CustomButton } from '../../components/ButtonSM';
+import * as ImagePicker from 'expo-image-picker';
 
 import { globalTheme } from '../../global/styles/themes';
 import { useState } from 'react';
 import { ConfirmModal } from '../../components/ModalConfirmation';
 import { ButtonVoltar } from '../../components/ButtonVoltar';
+import { api } from '../../api';
+import { PrestadorDTO } from '../../dto/GetPrestadorDTO';
+import { configIp } from '../../api/config/configIp';
+import { substituirLocalhostPorIp } from '../../api/config/converterIP';
 
-
-const nome = 'Joyce dos Santos Silva';
-const email = 'joyce@gmail.com';
-const telefone = '(83) 99999-9999';
-const cnpj = '12.345.678/0001-00';
-const horario = '12h às 19h';
 
 export function ProfilePrestador() {
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [cnpj, setCnpj] = useState('');
+    const [disponibilidade, setDisponibilidade] = useState('');
+    const [foto, setFoto] = useState('');
+
+    const [dadosAnuncios, setDadosAnuncios] = useState('');
+    const [carregando, setCarregando] = useState<boolean>(false);
+  
+
+    const buscarDadosPrestador = async () => {
+        try {
+            setCarregando(true);
+            const response = await api.get('/prestadorPerfil');
+            setName(response.data.name);
+            setEmail(response.data.email);
+            setPhone(response.data.telefone);
+            setCnpj(response.data.cnpj);
+            setDisponibilidade(response.data.name);
+            setFoto(substituirLocalhostPorIp(response.data.foto, configIp.apiBaseUrl));
+        } catch (error) {
+            console.error('Erro ao carregar anúncios:', error);
+            Alert.alert('Erro', 'Não foi possível carregar os anúncios');
+        } finally {
+            setCarregando(false);
+        }
+    };
+
+    useFocusEffect(
+        useCallback(() => {
+            buscarDadosPrestador();
+        }, [])
+    );
+
+
     const handleDeletePress = () => {
         setModalVisible(true);
     };
@@ -28,23 +66,71 @@ export function ProfilePrestador() {
 
     const [isModalVisible, setModalVisible] = useState(false);
 
-    const handlePress = () => {
-        Alert.alert('Left button pressed');
+      const pickImage = async () => {
+        // Solicita permissões para acessar a galeria de fotos
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+        if (status !== 'granted') {
+            Alert.alert('Permissão necessária', 'Precisamos de permissão para acessar sua galeria!');
+            return;
+        }
+
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            quality: 1,
+        });
+
+        if (!result.canceled) {
+            setFoto(result.assets[0].uri); // define a URI da imagem selecionada
+        }
+
+        uploadImage();
+
+
+
     };
+    const uploadImage = async () => {
+        if (!foto) {
+          Alert.alert('Erro', 'Nenhuma imagem selecionada.');
+          return;
+        }
+      
+        const formData = new FormData();
+        
+        formData.append('file', {
+            uri: foto,      // URI da imagem
+            name: 'profile.jpg',  // Nome da imagem (pode alterar dinamicamente)
+            type: 'image/jpeg',   // Tipo da imagem
+          } as any);  // Forçando o tipo para aceitar a estrutura correta
+      
+        try {
+          const response = await api.put('/prestadorFoto', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          });
+      
+          console.log('Foto enviada com sucesso:', response.data);
+          Alert.alert('Sucesso', 'Foto atualizada com sucesso!');
+        } catch (error) {
+          Alert.alert('Erro', 'Falha ao enviar a foto.');
+        }
+      };
+
+
     return (
         <View style={styles.container}>
             <View style={styles.buttonVoltar}>
-                <ButtonVoltar/>
+                <ButtonVoltar />
             </View>
-            {/* view das imagens */}
             <View style={styles.imageView}>
-                <Image
-                    source={require('../../../assets/jesus.png')}
-                    style={styles.profile}
-                />
-                <Text style={styles.editProfile}>
+                {foto && <Image source={{ uri: foto }} style={styles.profile} />}
+
+                <Text style={styles.editProfile} onPress={pickImage}>
                     Alterar Foto
                 </Text>
+
 
             </View>
 
@@ -52,7 +138,7 @@ export function ProfilePrestador() {
             <View style={styles.informations}>
                 <View style={styles.separator}>
                     <Text style={styles.textBold}> Nome:</Text>
-                    <Text style={styles.textInformation}> {nome} </Text>
+                    <Text style={styles.textInformation}> {name} </Text>
                 </View>
                 <View style={styles.separator}>
                     <Text style={styles.textBold}> Email:</Text>
@@ -60,7 +146,7 @@ export function ProfilePrestador() {
                 </View>
                 <View style={styles.separator}>
                     <Text style={styles.textBold}> Telefone:</Text>
-                    <Text style={styles.textInformation}> {telefone} </Text>
+                    <Text style={styles.textInformation}> {phone} </Text>
                 </View>
                 <View style={styles.separator}>
                     <Text style={styles.textBold}> CNPJ:</Text>
@@ -68,7 +154,7 @@ export function ProfilePrestador() {
                 </View>
                 <View style={styles.separator}>
                     <Text style={styles.textBold}> Horário:</Text>
-                    <Text style={styles.textInformation}> {horario} </Text>
+                    <Text style={styles.textInformation}> {disponibilidade} </Text>
                 </View>
             </View>
 
@@ -96,6 +182,7 @@ export function ProfilePrestador() {
                 title={'Perfil'}
                 message={'Deseja realmente excluir seu perfil?'}
             />
+            {/* view das imagens */}
 
         </View>
     )
