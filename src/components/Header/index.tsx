@@ -7,13 +7,17 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 interface CustomHeaderProps {
     image: ImageSourcePropType;
+    onPress: () => void        
 }
 
-export function Header({ image }: CustomHeaderProps) {
+
+export function Header({ image, onPress }: CustomHeaderProps) {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>HomeServices</Text>
-            <Image style={styles.imageProfile} source={image} />
+            <TouchableOpacity onPress={onPress}>
+                <Image style={styles.imageProfile} source={image} />
+            </TouchableOpacity>
         </View>
     );
 }

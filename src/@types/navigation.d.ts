@@ -1,6 +1,7 @@
 export declare global {
     namespace ReactNavigation {
       interface RootParamList {
+        Home: undefined;
         Login: undefined;
         CreatePrestador: undefined;
         CreateCliente: undefined;
@@ -9,7 +10,9 @@ export declare global {
         SelectUser: undefined;
         CreateAnuncio: undefined;
         UpdateCliente: undefined;
+        UpdateProfilePrestador: undefined;
         UpdateAnuncio: undefined;
+        ProfilePrestador: undefined
         // PageB: {user:{
         //   name:string,
         //   cpf:string

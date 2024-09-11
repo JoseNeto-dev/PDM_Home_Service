@@ -1,6 +1,6 @@
 import { View, Image, Alert, ViewStyle } from 'react-native';
 import { useCallback } from 'react'
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { styles } from './styles'
 import { Divider, Text } from 'react-native-paper';
 import { CustomButton } from '../../components/ButtonSM';
@@ -28,6 +28,7 @@ export function ProfilePrestador() {
     const [dadosAnuncios, setDadosAnuncios] = useState('');
     const [carregando, setCarregando] = useState<boolean>(false);
   
+    const navigation = useNavigation()
 
     const buscarDadosPrestador = async () => {
         try {
@@ -37,11 +38,12 @@ export function ProfilePrestador() {
             setEmail(response.data.email);
             setPhone(response.data.telefone);
             setCnpj(response.data.cnpj);
-            setDisponibilidade(response.data.name);
-            setFoto(substituirLocalhostPorIp(response.data.foto, configIp.apiBaseUrl));
+            setDisponibilidade(response.data.horarioDisponibilidade);
+            const fotoInicial = substituirLocalhostPorIp(response.data.foto, configIp.apiBaseUrl);
+            setFoto(fotoInicial);
         } catch (error) {
-            console.error('Erro ao carregar anúncios:', error);
-            Alert.alert('Erro', 'Não foi possível carregar os anúncios');
+            console.error('Erro ao carregar dados do perfil! :(', error);
+            Alert.alert('Erro ao carregar dados do perfil! :(');
         } finally {
             setCarregando(false);
         }
@@ -58,10 +60,21 @@ export function ProfilePrestador() {
         setModalVisible(true);
     };
 
-    const confirmDelete = () => {
+    const handleUptdatePress = () => {
+        navigation.navigate("UpdateProfilePrestador")
+    };
+
+    const confirmDelete = async () => {
         setModalVisible(false);
-        console.log('Perfil deletado!');
-        Alert.alert('Perfil deletado com sucesso!');
+        try{
+            const deletar = await api.delete("/prestador")
+            console.log('Perfil deletado!');
+            Alert.alert('Perfil deletado com sucesso!');
+            navigation.navigate("Home")
+        }
+        catch {
+
+        }
     };
 
     const [isModalVisible, setModalVisible] = useState(false);
@@ -162,7 +175,7 @@ export function ProfilePrestador() {
             <View style={styles.buttons}>
                 <CustomButton
                     title="Editar"
-                    onPress={() => Alert.alert('Left button pressed')}
+                    onPress={handleUptdatePress}
                     color='#ffff'
                     textColor='#564CAF'
                     borderColor='#564CAF'

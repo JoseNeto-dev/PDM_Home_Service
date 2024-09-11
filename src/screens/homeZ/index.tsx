@@ -7,7 +7,7 @@ import { Login } from '../loginZ';
 
 export function Home() {
 
-    const navigation = useNavigation()
+    const navigation = useNavigation();
 
     const entrar = () => {
         navigation.navigate("Login") 

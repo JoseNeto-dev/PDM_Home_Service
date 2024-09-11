@@ -45,7 +45,8 @@ export const styles = StyleSheet.create({
     height: 200,
     width: 200,
     borderRadius: 1000,
-    backgroundColor: 'red',
+    borderColor: globalTheme.COLORS.purple700,
+    borderWidth: 1
   },
   imageView: {
     width: 250,
@@ -56,7 +57,7 @@ export const styles = StyleSheet.create({
     
   },
   editProfile: {
-    fontSize: globalTheme.SIZE.xm,
+    fontSize: globalTheme.SIZE.sm,
     color: globalTheme.COLORS.purple700,
     fontFamily: globalTheme.FONTS.bold,
     textDecorationLine: 'underline'

@@ -48,7 +48,8 @@ export const styles = StyleSheet.create({
     height: 200,
     width: 200,
     borderRadius: 1000,
-    backgroundColor: globalTheme.COLORS.purple300
+    borderColor: globalTheme.COLORS.purple700,
+    borderWidth: 1
   },
   imageView: {
     width: 250,

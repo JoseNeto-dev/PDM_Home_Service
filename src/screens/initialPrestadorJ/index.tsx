@@ -38,9 +38,12 @@ export function InitialPrestador() {
     const criarAnuncio = () => {
       navigation.navigate('CreateAnuncio');
     };  
+    const navigateToProfilePrestador = () => {
+      navigation.navigate('ProfilePrestador');
+    };  
     return (
       <View style={styles.container}>
-        <Header image={require('../../../assets/jesus.png')} key={2} />
+        <Header image={require('../../../assets/jesus.png')} onPress={navigateToProfilePrestador} key={2} />
   
         {carregando ? (
           <Text>Carregando...</Text>
