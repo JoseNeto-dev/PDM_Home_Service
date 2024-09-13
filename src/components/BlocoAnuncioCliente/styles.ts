@@ -4,7 +4,7 @@ import { color } from '@rneui/themed/dist/config';
 
 export const blocoAnuncioStyles = StyleSheet.create({
     container: {
-        height: 131,
+        height: 145,
         width: 370,
         flexDirection: 'row',
         borderColor: globalTheme.COLORS.purple700,
@@ -38,8 +38,7 @@ export const blocoAnuncioStyles = StyleSheet.create({
         position: 'relative', // Posição relativa para referência
         zIndex: 1,
         gap:1,
-        width: 233
-
+        width: 340
     },
     iconView: {
         flexDirection: 'row',

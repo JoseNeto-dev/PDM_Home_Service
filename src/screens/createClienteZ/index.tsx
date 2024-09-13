@@ -28,7 +28,7 @@ export function CreateCliente() {
             if (response.status === 201) {
                 console.log('Cliente cadastrado com sucesso!');
                 Alert.alert('Cliente cadastrado com sucesso!');
-                navigation.navigate("Login"); // Navega para a tela de login após sucesso
+                navigation.navigate("Home"); // Navega para a tela de login após sucesso
             }
         } catch (error: any) {
             // Exibindo uma mensagem de erro apropriada

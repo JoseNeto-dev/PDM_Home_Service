@@ -79,13 +79,14 @@ export function CategoriaEscolhida() {
                     showsVerticalScrollIndicator={false}
                     renderItem={({ item }) => (
                         <BlocoAnuncioCliente
-                            namePrestador={item.prestador.usuario.nome}
-                            onPress={handlePress}
-                            preco={item.preco}
-                            title={item.titulo}
-                            image={item.categoria.icone}
-                            city={'São José de Piranhas'} // Substitua pelo valor real se disponível
-                        />
+                        namePrestador={item.prestador.usuario ? item.prestador.usuario.nome : 'Nome não disponível'}
+                        preco={item.preco}
+                        title={item.titulo}
+                        image={item.categoria.icone}
+                        telefone={item.prestador.usuario.telefone}
+                        latitude={item.prestador.latitude}
+                        longitude={item.prestador.longitude}
+                    />
                     )}
                     keyExtractor={(item) => item.id}
                     contentContainerStyle={{

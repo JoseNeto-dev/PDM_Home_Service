@@ -64,10 +64,10 @@ export function ListPrestadores() {
                 renderItem={({ item }) => (
                     <BlocoInformationPrestador
                         namePrestador={item.nome}
-                        onPress={handlePress}
                         email= {item.email}
                         image={item.foto}
-                        city={"São José de Piranhas"}
+                        latitude={item.prestador.latitude}
+                        longitude={item.prestador.longitude}
                     />
                 )}
                 keyExtractor={(item) => item.id}

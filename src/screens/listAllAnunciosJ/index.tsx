@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useContext } from 'react';
-import { View, Text, Alert, FlatList } from 'react-native';
+import { View, Text, Alert, FlatList, TouchableOpacity } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { api } from '../../api';
 import { styles } from './styles';
@@ -9,6 +9,8 @@ import { AnuncioCompletoDTO } from '../../dto/AnuncioCompletoDTO';
 import { configIp } from '../../api/config/configIp';
 import { processarAnuncios } from '../../api/config/converterIP';
 import { AuthContext } from '../../contextS/Auth';
+import { Button } from 'react-native-paper';
+import { CustomButton } from '../../components/ButtonXL';
 
 
 export function ListAnuncios() {
@@ -44,9 +46,7 @@ export function ListAnuncios() {
         }, [])
     );
 
-    const aoPressionar = () => {
-        Alert.alert('Direcionar para o whats');
-    };
+    // const localização = getAddressFromLatLon(item.prestador.latitude, item.prestador.longitude);
 
     return (
         <View style={styles.container}>
@@ -67,12 +67,14 @@ export function ListAnuncios() {
                 renderItem={({ item }) => (
                     <BlocoAnuncioCliente
                         namePrestador={item.prestador.usuario ? item.prestador.usuario.nome : 'Nome não disponível'}
-                        onPress={aoPressionar}
                         preco={item.preco}
                         title={item.titulo}
                         image={item.categoria.icone}
-                        city={'Cajazeiras'}
+                        telefone={item.prestador.usuario.telefone}
+                        latitude={item.prestador.latitude}
+                        longitude={item.prestador.longitude}
                     />
+
                 )}
                 keyExtractor={(item) => item.id}
                 contentContainerStyle={{
@@ -82,7 +84,9 @@ export function ListAnuncios() {
                 }}
                 style={{ flex: 1 }}
             />
+
             )}
+
         </View>
     );
 }

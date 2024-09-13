@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, TouchableOpacity, Text, Image, ImageSourcePropType } from 'react-native';
 import { blocoAnuncioStyles } from "./styles"
 import { globalTheme } from '../../global/styles/themes';
@@ -9,12 +9,47 @@ import { styles } from '../Header/styles';
 interface CustomBlocoInfoProps {
     namePrestador: string;
     email: string;
-    city: string;
-    onPress: () => void;
     image?: string;
+    latitude: number;
+    longitude: number;
 }
 
-export function BlocoInformationPrestador({ namePrestador, email, onPress, image, city }: CustomBlocoInfoProps) {
+const getAddressFromLatLon = async (latitude: number, longitude: number) => {
+    const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`;
+
+    try {
+        const response = await fetch(url, {
+            headers: {
+                'User-Agent': 'YourAppName', // Nominatim recomenda incluir isso
+                'Accept': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro ao buscar o endereço: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        const locCompleta = `${data.address.city_district} - ${data.address.state}`
+        return locCompleta; // Retorna o endereço completo
+    } catch (error) {
+        console.error('Erro:', error);
+        return 'Endereço indisponível';
+    }
+};
+
+export function BlocoInformationPrestador({ namePrestador, email, image, latitude, longitude }: CustomBlocoInfoProps) {
+    const [localizacao, setLocalizacao] = useState<string | null>(null);
+
+    useEffect(() => {
+        const fetchAddress = async () => {
+            const address = await getAddressFromLatLon(latitude, longitude);
+            setLocalizacao(address);
+        };
+
+        fetchAddress();
+    }, [latitude, longitude]);
     return (
         <View style={blocoAnuncioStyles.container}>
 
@@ -31,18 +66,11 @@ export function BlocoInformationPrestador({ namePrestador, email, onPress, image
                     </Text>
                     <Text numberOfLines={1}>
                         <Text style={blocoAnuncioStyles.description}>Cidade: </Text>
-                        <Text style={blocoAnuncioStyles.content}>{city}</Text>
+                        <Text style={blocoAnuncioStyles.content}>{localizacao ? localizacao : 'Carregando endereço...'}</Text>
                     </Text>
 
                 </View>
             </View>
-            <View style={blocoAnuncioStyles.iconView}>
-                <TouchableOpacity onPress={() => console.log('Edit icon pressed')} style={blocoAnuncioStyles.icons}>
-                    <FontAwesome name="whatsapp" size={20} color={globalTheme.COLORS.white} />
-                </TouchableOpacity>
-
-            </View>
-
         </View>
     );
 }

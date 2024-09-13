@@ -40,7 +40,7 @@ export const blocoAnuncioStyles = StyleSheet.create({
         position: 'relative', // Posição relativa para referência
         zIndex: 1,
         gap:1,
-        width: 245
+    width: 350
     },
     iconView: {
         flexDirection: 'row',

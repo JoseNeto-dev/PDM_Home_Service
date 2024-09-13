@@ -38,7 +38,7 @@ export function CreatePrestador() {
                 setDisponibilidade('');
                 setCnpj('');
 
-                navigation.navigate("Login"); // Navega para a tela de login após sucesso
+                navigation.navigate("Home"); // Navega para a tela de login após sucesso
                 console.log('Prestador cadastrado com sucesso!');
                 Alert.alert('Prestador cadastrado com sucesso!');
             }
