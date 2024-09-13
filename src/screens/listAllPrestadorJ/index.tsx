@@ -3,11 +3,12 @@ import { styles } from './styles';
 import { BlocoInformationPrestador } from '../../components/BlocoPrestadorCliente';
 import { ButtonVoltar } from '../../components/ButtonVoltar';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import { useCallback, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { PrestadorDTO } from '../../dto/GetPrestadorDTO';
 import { api } from '../../api';
 import { configIp } from '../../api/config/configIp';
 import { processarPrestador } from '../../api/config/converterIP';
+import { AuthContext } from '../../contextS/Auth';
 
 
 
@@ -15,10 +16,17 @@ export function ListPrestadores() {
     const navigation = useNavigation();
     const [dadosPrestador, setDadosPrestador] = useState<PrestadorDTO[]>([]);
     const [carregando, setCarregando] = useState<boolean>(true);
+    const authData = useContext(AuthContext);
 
     const buscarPrestadores = async () => {
         try {
-          const response = await api.get<PrestadorDTO[]>('/prestador');
+          const response = await api.get<PrestadorDTO[]>('/prestador', {
+            headers: {
+                Authorization: `Bearer ${authData.authData?.token}`,
+                email: authData.authData?.email
+              }
+        
+          });
           const prestadorComIp = processarPrestador(response.data, configIp.apiBaseUrl);
           setDadosPrestador(prestadorComIp);
         } catch (error) {

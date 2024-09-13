@@ -1,5 +1,5 @@
 import { styles } from './styles';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, TextInput, Alert, ScrollView, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import { requestForegroundPermissionsAsync, getCurrentPositionAsync, LocationObject } from 'expo-location';
 import MapView, { Marker } from 'react-native-maps';
@@ -8,10 +8,12 @@ import { ButtonVoltar } from '../../components/ButtonVoltar';
 import { useNavigation } from '@react-navigation/native';
 import { PutPrestadorDTO } from '../../dto/PutPrestadorDTO';
 import { api } from '../../api';
+import { AuthContext } from '../../contextS/Auth';
 
 export function UpdateProfilePrestador() {
 
     const navigation = useNavigation()
+    const authData = useContext(AuthContext);
 
     const salvarPrestador = async () => {
         try {
@@ -25,7 +27,14 @@ export function UpdateProfilePrestador() {
             };
 
             // Enviando o cliente para a API
-            const response = await api.put<PutPrestadorDTO>('/prestador', prestador);
+            const response = await api.put<PutPrestadorDTO>('/prestador', prestador, {
+
+                headers: {
+                    Authorization: `Bearer ${authData.authData?.token}`,
+                    email: authData.authData?.email
+                }
+
+            });
 
             if (response.status === 200 || response.status === 201) {
                 setName('');

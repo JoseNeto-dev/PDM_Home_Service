@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { View, TouchableOpacity, Text, Image, ImageSourcePropType } from 'react-native';
 import { ImageProps } from "react-native";
 import { blocoAnuncioStyles } from "./styles"
@@ -7,18 +7,41 @@ import Delet from '@expo/vector-icons/MaterialIcons';
 import { styles } from '../../screens/homeZ/styles';
 import { globalTheme } from '../../global/styles/themes';
 import { ConfirmModal } from '../ModalConfirmation';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { api } from '../../api';
+import { AnuncioCompletoDTO } from '../../dto/AnuncioCompletoDTO';
+import { processarAnuncios } from '../../api/config/converterIP';
+import { configIp } from '../../api/config/configIp';
+import { AuthContext } from '../../contextS/Auth';
 
 interface CustomBlocoProps {
     namePrestador: string;
     title: string;
     image: string;
     preco: string;
+    idAnuncio: string;
+    refreshAnuncios: () => void;
 }
 
-export function BlocoAnuncioPrestador({ namePrestador, title, image, preco }: CustomBlocoProps) {
+export function BlocoAnuncioPrestador({ namePrestador, title, image, preco, idAnuncio, refreshAnuncios}: CustomBlocoProps) {
     const navigation = useNavigation();
     const [isModalVisible, setModalVisible] = useState(false);
+    const [dadosAnuncios, setDadosAnuncios] = useState<AnuncioCompletoDTO[]>([]);
+    const authData = useContext(AuthContext);
+
+    // const loadData = async () => {
+    //     const response = await api.get<AnuncioCompletoDTO[]>('/anunciosPrestador',{
+    //         headers: {
+    //             Authorization: `Bearer ${authData.authData?.token}`,
+    //             email: authData.authData?.email
+    //           }
+    //     });
+    //     const anunciosComIp = processarAnuncios(response.data, configIp.apiBaseUrl);
+    //     setDadosAnuncios(anunciosComIp);
+    //     console.log(dadosAnuncios);
+        
+        
+    // }
 
     const handleDeletePress = () => {
         setModalVisible(true);
@@ -28,10 +51,16 @@ export function BlocoAnuncioPrestador({ namePrestador, title, image, preco }: Cu
         navigation.navigate('UpdateAnuncio');
     };
 
-    const confirmDelete = () => {
+    const confirmDelete = async () => {
         setModalVisible(false);
-        // Aqui você pode adicionar a lógica para deletar o item
+        const deletar = await api.delete(`/anuncio/${idAnuncio}`, {
+            headers: {
+                Authorization: `Bearer ${authData.authData?.token}`,
+                email: authData.authData?.email
+              }
+        })
         console.log('Item deletado!');
+        refreshAnuncios();
     };
 
     return (

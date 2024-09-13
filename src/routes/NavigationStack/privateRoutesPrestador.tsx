@@ -6,6 +6,7 @@ import { CreateAnuncio } from "../../screens/createAnuncioD"
 import { UpdateAnuncio } from "../../screens/updateAnuncioD"
 import { UpdateProfilePrestador } from "../../screens/updateProfilePrestadorZ";
 import { ProfilePrestador } from "../../screens/profilePrestadorZ";
+import { Home } from "../../screens/homeZ";
 
 const { Navigator, Screen } = createNativeStackNavigator()
 
@@ -17,6 +18,7 @@ export function PrivateRoutesPrestador() {
             <Screen name="UpdateProfilePrestador" component={UpdateProfilePrestador} />
             <Screen name="CreateAnuncio" component= {CreateAnuncio} />
             <Screen name="UpdateAnuncio" component= {UpdateAnuncio} />
+            
         </Navigator>
     )
 }

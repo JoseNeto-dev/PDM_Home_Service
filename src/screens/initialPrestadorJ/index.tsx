@@ -5,22 +5,30 @@ import { BlocoAnuncioPrestador } from '../../components/BlocoAnuncioPrestador';
 import { globalTheme } from '../../global/styles/themes';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import { useCallback, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { AnuncioCompletoDTO } from '../../dto/AnuncioCompletoDTO';
 import { api } from '../../api';
 import { configIp } from '../../api/config/configIp';
 import { processarAnuncios } from '../../api/config/converterIP';
+import { AuthContext } from '../../contextS/Auth';
 
 export function InitialPrestador() {
     const navigation = useNavigation();
     const [dadosAnuncios, setDadosAnuncios] = useState<AnuncioCompletoDTO[]>([]);
     const [carregando, setCarregando] = useState<boolean>(true);
+    const authData = useContext(AuthContext);
   
     const buscarAnuncios = async () => {
       try {
-        const response = await api.get<AnuncioCompletoDTO[]>('/anunciosPrestador');
+        const response = await api.get<AnuncioCompletoDTO[]>('/anunciosPrestador', {
+          headers: {
+            Authorization: `Bearer ${authData.authData?.token}`,
+            email: authData.authData?.email
+          }
+        });
         const anunciosComIp = processarAnuncios(response.data, configIp.apiBaseUrl);
         setDadosAnuncios(anunciosComIp);
+        
       } catch (error) {
         console.error('Erro ao carregar anúncios:', error);
         Alert.alert('Erro', 'Não foi possível carregar os anúncios');
@@ -62,6 +70,8 @@ export function InitialPrestador() {
                 preco={item.preco}
                 title={item.titulo}
                 image={item.categoria.icone}
+                idAnuncio={item.id}
+                refreshAnuncios={buscarAnuncios}
               />
             )}
             keyExtractor={(item) => item.id}

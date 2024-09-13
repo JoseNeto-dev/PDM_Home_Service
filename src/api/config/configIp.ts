@@ -1,3 +1,3 @@
 export const configIp = {
-    apiBaseUrl: '192.168.43.252' // Substitua pelo IP da sua máquina
+    apiBaseUrl: '10.3.143.57' // Substitua pelo IP da sua máquina
 };

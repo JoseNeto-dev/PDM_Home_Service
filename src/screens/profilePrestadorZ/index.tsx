@@ -1,5 +1,5 @@
 import { View, Image, Alert, ViewStyle } from 'react-native';
-import { useCallback } from 'react'
+import { useCallback, useContext } from 'react'
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { styles } from './styles'
 import { Divider, Text } from 'react-native-paper';
@@ -14,6 +14,7 @@ import { api } from '../../api';
 import { PrestadorDTO } from '../../dto/GetPrestadorDTO';
 import { configIp } from '../../api/config/configIp';
 import { substituirLocalhostPorIp } from '../../api/config/converterIP';
+import { AuthContext } from '../../contextS/Auth';
 
 
 export function ProfilePrestador() {
@@ -27,13 +28,19 @@ export function ProfilePrestador() {
 
     const [dadosAnuncios, setDadosAnuncios] = useState('');
     const [carregando, setCarregando] = useState<boolean>(false);
-  
+
     const navigation = useNavigation()
+    const authData = useContext(AuthContext);
 
     const buscarDadosPrestador = async () => {
         try {
             setCarregando(true);
-            const response = await api.get('/prestadorPerfil');
+            const response = await api.get('/prestadorPerfil', {
+                headers: {
+                    Authorization: `Bearer ${authData.authData?.token}`,
+                    email: authData.authData?.email
+                }
+            });
             setName(response.data.name);
             setEmail(response.data.email);
             setPhone(response.data.telefone);
@@ -66,11 +73,18 @@ export function ProfilePrestador() {
 
     const confirmDelete = async () => {
         setModalVisible(false);
-        try{
-            const deletar = await api.delete("/prestador")
+        try {
+            const deletar = await api.delete("/prestador", {
+
+                headers: {
+                    Authorization: `Bearer ${authData.authData?.token}`,
+                    email: authData.authData?.email
+                }
+
+            })
             console.log('Perfil deletado!');
             Alert.alert('Perfil deletado com sucesso!');
-            navigation.navigate("Home")
+            authData.logOut();
         }
         catch {
 
@@ -79,7 +93,7 @@ export function ProfilePrestador() {
 
     const [isModalVisible, setModalVisible] = useState(false);
 
-      const pickImage = async () => {
+    const pickImage = async () => {
         // Solicita permissões para acessar a galeria de fotos
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
@@ -105,31 +119,31 @@ export function ProfilePrestador() {
     };
     const uploadImage = async () => {
         if (!foto) {
-          Alert.alert('Erro', 'Nenhuma imagem selecionada.');
-          return;
+            Alert.alert('Erro', 'Nenhuma imagem selecionada.');
+            return;
         }
-      
+
         const formData = new FormData();
-        
+
         formData.append('file', {
             uri: foto,      // URI da imagem
             name: 'profile.jpg',  // Nome da imagem (pode alterar dinamicamente)
             type: 'image/jpeg',   // Tipo da imagem
-          } as any);  // Forçando o tipo para aceitar a estrutura correta
-      
+        } as any);  // Forçando o tipo para aceitar a estrutura correta
+
         try {
-          const response = await api.put('/prestadorFoto', formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          });
-      
-          console.log('Foto enviada com sucesso:', response.data);
-          Alert.alert('Sucesso', 'Foto atualizada com sucesso!');
+            const response = await api.put('/prestadorFoto', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            console.log('Foto enviada com sucesso:', response.data);
+            Alert.alert('Sucesso', 'Foto atualizada com sucesso!');
         } catch (error) {
-          Alert.alert('Erro', 'Falha ao enviar a foto.');
+            Alert.alert('Erro', 'Falha ao enviar a foto.');
         }
-      };
+    };
 
 
     return (

@@ -13,6 +13,7 @@ export declare global {
         UpdateProfilePrestador: undefined;
         UpdateAnuncio: undefined;
         ProfilePrestador: undefined
+        InitialPrestador: undefined
         // PageB: {user:{
         //   name:string,
         //   cpf:string

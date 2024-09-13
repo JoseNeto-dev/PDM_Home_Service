@@ -2,18 +2,20 @@ import { View, Text, Image, Button, Alert, FlatList } from 'react-native';
 import { styles } from './styles';
 import { BlocoAnuncioCliente } from '../../components/BlocoAnuncioCliente';
 import { ButtonVoltar } from '../../components/ButtonVoltar';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { AnuncioCompletoDTO } from '../../dto/AnuncioCompletoDTO';
 import { api } from '../../api';
 import { configIp } from '../../api/config/configIp';
 import { useFocusEffect } from '@react-navigation/native';
 import { processarAnuncios } from '../../api/config/converterIP';
+import { AuthContext } from '../../contextS/Auth';
 
 export function CategoriaEscolhida() {
     const [dadosAnuncios, setDadosAnuncios] = useState<AnuncioCompletoDTO[]>([]);
     const [carregando, setCarregando] = useState<boolean>(true);
     const [nomeCategoria, setNomeCategoria] = useState<string>('');
     const [idCategoria, setIdCategoria] = useState<string>('');
+    const authData = useContext(AuthContext);
 
     useEffect(() => {
         // Aqui você pode definir o idCategoria a partir de props ou outras fontes
@@ -23,7 +25,14 @@ export function CategoriaEscolhida() {
     const buscarAnuncios = async () => {
         try {
             // Note que a URL agora inclui o idCategoria diretamente como parte da URL
-            const response = await api.get<AnuncioCompletoDTO[]>(`/anunciosCategoria/${idCategoria}`);
+            const response = await api.get<AnuncioCompletoDTO[]>(`/anunciosCategoria/${idCategoria}`, {
+
+                headers: {
+                    Authorization: `Bearer ${authData.authData?.token}`,
+                    email: authData.authData?.email
+                }
+
+            });
             const anunciosComIp = processarAnuncios(response.data, configIp.apiBaseUrl);
             setDadosAnuncios(anunciosComIp);
 
