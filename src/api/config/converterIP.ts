@@ -5,6 +5,11 @@ export const substituirLocalhostPorIp = (url: string, enderecoIp: string): strin
   return url.replace('localhost', enderecoIp);
 };
 
+export const substituirIpPorLocalhost = (url: string, enderecoIp: string): string => {
+  return url.replace(enderecoIp, 'localhost');
+};
+
+
 export const processarAnuncios = (anuncios: AnuncioCompletoDTO[], enderecoIp: string): AnuncioCompletoDTO[] => {
   return anuncios.map((anuncio) => ({
     ...anuncio,
