@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, Image, ImageSourcePropType } from 'react-native';
-import { ImageProps } from "react-native";
+import React from 'react';
+import { View, Text, Image} from 'react-native';
 import { blocoAnuncioStyles } from "./styles"
-import { useNavigation } from '@react-navigation/native';
 
 interface CustomBlocoProps {
     categoria: string;
@@ -11,11 +9,6 @@ interface CustomBlocoProps {
 }
 
 export function BlocoCategoria({ categoria, image}: CustomBlocoProps) {
-    const navigation = useNavigation();
-
-    const handlePress = () => {
-    };
-
     return (
         <View style={blocoAnuncioStyles.container}>
             <Image style={blocoAnuncioStyles.image} source={{uri: image}} />

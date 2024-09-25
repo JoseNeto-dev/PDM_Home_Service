@@ -32,8 +32,8 @@ export function InitialCliente() {
         if (response.status === 200) {
             const categoriasComIp = response.data.map(categoria => ({
                 id: categoria.id,
-                servico: categoria.servico, // Mapeia 'servico' para 'categoria'
-                icone: substituirLocalhostPorIp(categoria.icone, configIp.apiBaseUrl), // Mapeia 'icone' para 'foto'
+                servico: categoria.servico,
+                icone: substituirLocalhostPorIp(categoria.icone, configIp.apiBaseUrl),
             }));
             setDadosCategoria(categoriasComIp);
         } else {
@@ -45,10 +45,6 @@ export function InitialCliente() {
     }
 };
 
-    
-    
-
-    // Função para buscar os dados do cliente
     const buscarDadosCliente = async () => {
         try {
             setCarregando(true);
@@ -75,7 +71,6 @@ export function InitialCliente() {
         setRefreshing(false);
     };
 
-    // Função que executa ao focar a tela
     useFocusEffect(
         useCallback(() => {
             buscarDadosCliente();
@@ -83,7 +78,6 @@ export function InitialCliente() {
         }, [])
     );
 
-    // Função de navegação ao escolher uma categoria
     const CategoriaEscolhida = (id: string) => {
         navigation.navigate('CategoriaEscolhida', { idCategoria: id });
     };
@@ -137,7 +131,7 @@ export function InitialCliente() {
                     }}
                     style={{ flex: 1 }}
                     refreshing={refreshing}
-                    onRefresh={onRefresh} // Adiciona a função de refresh
+                    onRefresh={onRefresh}
                 />
             )}
             <View style={styles.barra}>

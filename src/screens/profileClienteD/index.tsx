@@ -1,5 +1,5 @@
 import React, { useState, useContext, useCallback } from 'react';
-import { View, Image, Alert, TouchableOpacity, ViewStyle } from 'react-native';
+import { View, Image, Alert, ViewStyle } from 'react-native';
 import { Text } from 'react-native-paper';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { styles } from './styles';
@@ -52,14 +52,12 @@ export function ProfileCliente() {
         }
     };
 
-    // Similar à tela do prestador, usamos o hook `useFocusEffect`
     useFocusEffect(
         useCallback(() => {
             buscarDadosCliente();
         }, [])
     );
 
-    // Função para seleção e upload de imagem
     const pickImage = async () => {
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (status !== 'granted') {
@@ -74,9 +72,9 @@ export function ProfileCliente() {
         });
 
         if (!result.canceled) {
-            const newPhotoUri = result.assets[0].uri; // Nova URI da imagem
-            setFoto(newPhotoUri); // Atualiza o estado com a nova URI
-            await uploadImage(newPhotoUri); // Chama uploadImage com a nova URI
+            const newPhotoUri = result.assets[0].uri;
+            setFoto(newPhotoUri);
+            await uploadImage(newPhotoUri);
         }
     };
 
@@ -109,7 +107,6 @@ export function ProfileCliente() {
         }
     };
 
-    // Função para confirmar exclusão de perfil
     const confirmDelete = async () => {
         setModalVisible(false);
         try {
@@ -141,7 +138,6 @@ export function ProfileCliente() {
                 <ButtonVoltar />
             </View>
 
-            {/* view das imagens */}
             <View style={styles.imageView}>
                 {foto && <Image source={{ uri: foto }} style={styles.profile} />}
                 <Text style={styles.editProfile} onPress={pickImage}>
@@ -149,7 +145,6 @@ export function ProfileCliente() {
                 </Text>
             </View>
 
-            {/* view dos textos das informações */}
             <View style={styles.informations}>
                 <View style={styles.separator}>
                     <Text style={styles.textBold}> Nome:</Text>
@@ -173,7 +168,6 @@ export function ProfileCliente() {
                 </View>
             </View>
 
-            {/* view dos botões */}
             <View style={styles.buttons}>
                 <CustomButton
                     title="Editar"
@@ -191,7 +185,6 @@ export function ProfileCliente() {
                 />
             </View>
 
-            {/* Modal de Confirmação */}
             <ConfirmModal
                 visible={isModalVisible}
                 onConfirm={confirmDelete}

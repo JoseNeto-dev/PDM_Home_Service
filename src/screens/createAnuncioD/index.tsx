@@ -7,19 +7,18 @@ import { Picker } from '@react-native-picker/picker';
 import { api } from '../../api';
 import { AuthContext } from '../../contextS/Auth';
 import { useNavigation } from '@react-navigation/native';
-import { CategoriaDTO } from '../../dto/CategoriaDTO'; // Importe seu DTO de categoria
+import { CategoriaDTO } from '../../dto/CategoriaDTO';
 
 export function CreateAnuncio() {
     const [titulo, setTitulo] = useState('');
     const [descricao, setDescricao] = useState('');
     const [preco, setPreco] = useState('');
     const [categoria, setCategoria] = useState('');
-    const [categoriasDisponiveis, setCategoriasDisponiveis] = useState<CategoriaDTO[]>([]); // Estado para categorias
+    const [categoriasDisponiveis, setCategoriasDisponiveis] = useState<CategoriaDTO[]>([]);
 
     const authData = useContext(AuthContext);
     const navigation = useNavigation();
 
-    // Função para obter categorias da API
     const obterCategorias = async () => {
         try {
             const response = await api.get('/listCategorias', {
@@ -29,7 +28,7 @@ export function CreateAnuncio() {
                 },
             });
             if (response.status === 200) {
-                setCategoriasDisponiveis(response.data); // Assume que a resposta contém um array de categorias
+                setCategoriasDisponiveis(response.data);
             }
         } catch (error: any) {
             console.error('Erro ao obter categorias:', error);
@@ -47,7 +46,7 @@ export function CreateAnuncio() {
                 titulo,
                 descricao,
                 preco,
-                categoriaId: categoria // Supondo que a API espere o ID da categoria
+                categoriaId: categoria
             };
 
             const response = await api.post('/anuncio', anuncio, {
@@ -115,7 +114,7 @@ export function CreateAnuncio() {
                             <Picker.Item
                                 key={cat.id}
                                 label={cat.servico}
-                                value={cat.id} // Usar o id da categoria aqui
+                                value={cat.id}
                             />
                         ))}
                     </Picker>

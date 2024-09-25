@@ -10,13 +10,11 @@ import { AuthContext } from '../../contextS/Auth';
 export function UpdateCliente() {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
-    const [cpf, setCpf] = useState('');
     const [address, setAddress] = useState('');
 
     const navigation = useNavigation();
     const authData = useContext(AuthContext);
 
-    // Função para buscar dados do cliente
     const buscarDadosCliente = async () => {
         try {
             const response = await api.get('/clientePerfil', {
@@ -28,7 +26,6 @@ export function UpdateCliente() {
 
             setName(response.data.nome);
             setPhone(response.data.telefone);
-            setCpf(response.data.cpf);
             setAddress(response.data.endereco);
         } catch (error) {
             console.error('Erro ao carregar dados do perfil!', error);
@@ -45,7 +42,6 @@ export function UpdateCliente() {
             const cliente = {
                 nome: name,
                 telefone: phone,
-                cpf: cpf,
                 endereco: address,
             };
 
@@ -59,7 +55,6 @@ export function UpdateCliente() {
             if (response.status === 200 || response.status === 201) {
                 setName('');
                 setPhone('');
-                setCpf('');
                 setAddress('');
                 navigation.navigate('ProfileCliente');
                 Alert.alert('Perfil atualizado com sucesso!');
@@ -99,13 +94,6 @@ export function UpdateCliente() {
                         placeholderTextColor="#9089CB"
                         onChangeText={setPhone}
                         value={phone}
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder="CPF"
-                        placeholderTextColor="#9089CB"
-                        onChangeText={setCpf}
-                        value={cpf}
                     />
                     <TextInput
                         style={styles.input}
