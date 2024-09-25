@@ -45,5 +45,20 @@ buttonVoltar: {
     borderRadius:15,
     borderWidth: 0.5,
     borderColor: globalTheme.COLORS.purple400
+  },
+  pickerContainer: {
+    height: 56,
+    width: 350,
+    backgroundColor: globalTheme.COLORS.white,
+    borderRadius: 15,
+    borderWidth: 0.5,
+    borderColor: globalTheme.COLORS.purple400,
+    justifyContent: 'center',
+    paddingLeft: 10,
+    marginBottom: 10,
+  },
+  picker: {
+    color: globalTheme.COLORS.purple700, // Cor do texto selecionado
+    width: '100%', // Certifique-se de que o picker ocupa toda a largura do container
   }
 });

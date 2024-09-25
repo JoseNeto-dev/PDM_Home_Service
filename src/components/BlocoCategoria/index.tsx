@@ -6,7 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 
 interface CustomBlocoProps {
     categoria: string;
-    image: ImageSourcePropType;
+    image: string;
+    
 }
 
 export function BlocoCategoria({ categoria, image}: CustomBlocoProps) {
@@ -17,7 +18,7 @@ export function BlocoCategoria({ categoria, image}: CustomBlocoProps) {
 
     return (
         <View style={blocoAnuncioStyles.container}>
-            <Image style={blocoAnuncioStyles.image} source={image} />
+            <Image style={blocoAnuncioStyles.image} source={{uri: image}} />
             <Text style={blocoAnuncioStyles.description}>{categoria} </Text>
         </View>
     );

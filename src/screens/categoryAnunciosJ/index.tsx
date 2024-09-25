@@ -6,22 +6,26 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { AnuncioCompletoDTO } from '../../dto/AnuncioCompletoDTO';
 import { api } from '../../api';
 import { configIp } from '../../api/config/configIp';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useRoute, RouteProp } from '@react-navigation/native';
 import { processarAnuncios } from '../../api/config/converterIP';
 import { AuthContext } from '../../contextS/Auth';
+import {RouteParams} from '../../dto/CategoriaDTO'
 
 export function CategoriaEscolhida() {
     const [dadosAnuncios, setDadosAnuncios] = useState<AnuncioCompletoDTO[]>([]);
     const [carregando, setCarregando] = useState<boolean>(true);
     const [nomeCategoria, setNomeCategoria] = useState<string>('');
-    const [idCategoria, setIdCategoria] = useState<string>('');
     const authData = useContext(AuthContext);
-
-    useEffect(() => {
-        // Aqui você pode definir o idCategoria a partir de props ou outras fontes
-        setIdCategoria('545210f7-be81-43a5-a03c-f3f06d30f621');
-    }, []);
-
+    const route = useRoute<RouteProp<RouteParams, 'CategoriaEscolhida'>>();
+    const { idCategoria } = route.params;
+    
+    useFocusEffect(
+        useCallback(() => {
+            if (idCategoria) { // Certifique-se de que categoriaId está disponível
+                buscarAnuncios();
+            }
+        }, [idCategoria])
+    );
     const buscarAnuncios = async () => {
         try {
             // Note que a URL agora inclui o idCategoria diretamente como parte da URL

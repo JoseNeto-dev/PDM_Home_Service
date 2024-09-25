@@ -12,7 +12,7 @@ const { Navigator, Screen } = createNativeStackNavigator()
 
 export function PrivateRoutesCliente() {
     return(
-        <Navigator initialRouteName="CategoriaEscolhida" screenOptions={{headerShown: false}}>
+        <Navigator initialRouteName="InitialCliente" screenOptions={{headerShown: false}}>
             <Screen name="InitialCliente" component={InitialCliente} />
             <Screen name="ListAnuncios" component={ListAnuncios} />
             <Screen name="ListPrestadores" component={ListPrestadores} />

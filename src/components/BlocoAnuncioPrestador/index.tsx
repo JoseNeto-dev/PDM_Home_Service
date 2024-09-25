@@ -30,7 +30,7 @@ export function BlocoAnuncioPrestador({ namePrestador, title, image, preco, idAn
     };
 
     const editAnuncioPress = () => {
-        navigation.navigate('UpdateAnuncio');
+        navigation.navigate('UpdateAnuncio', { idAnuncio });
     };
 
     const confirmDelete = async () => {

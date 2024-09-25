@@ -1,38 +1,138 @@
-import React, { useState } from 'react';
-import { View, Image, Alert, ViewStyle, TouchableOpacity } from 'react-native';
+import React, { useState, useContext, useCallback } from 'react';
+import { View, Image, Alert, TouchableOpacity, ViewStyle } from 'react-native';
 import { Text } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { styles } from './styles';
 import { CustomButton } from '../../components/ButtonSM';
 import { ConfirmModal } from '../../components/ModalConfirmation';
 import { ButtonVoltar } from '../../components/ButtonVoltar';
-
-const nome = 'Danrlei de Lira Silva';
-const email = 'danrlei@gmail.com';
-const telefone = '(83) 99999-9999';
-const cpf = '123.456.789-0';
-const endereco = 'Rua dos bobos - 0';
+import * as ImagePicker from 'expo-image-picker';
+import { api } from '../../api';
+import { AuthContext } from '../../contextS/Auth';
+import { configIp } from '../../api/config/configIp';
+import { substituirLocalhostPorIp } from '../../api/config/converterIP';
 
 export function ProfileCliente() {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [telefone, setTelefone] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [endereco, setEndereco] = useState('');
+    const [foto, setFoto] = useState('');
+
+    const [carregando, setCarregando] = useState<boolean>(false);
     const [isModalVisible, setModalVisible] = useState(false);
+
     const navigation = useNavigation();
+    const authData = useContext(AuthContext);
+
+    // Função para buscar os dados do cliente ao carregar a tela
+    const buscarDadosCliente = async () => {
+        try {
+            setCarregando(true);
+            const response = await api.get('/clientePerfil', {
+                headers: {
+                    Authorization: `Bearer ${authData.authData?.token}`,
+                    email: authData.authData?.email,
+                },
+            });
+
+            setName(response.data.name);
+            setEmail(response.data.email);
+            setTelefone(response.data.telefone);
+            setCpf(response.data.cpf);
+            setEndereco(response.data.endereco);
+            const fotoInicial = substituirLocalhostPorIp(response.data.foto, configIp.apiBaseUrl);
+            setFoto(fotoInicial);
+        } catch (error) {
+            console.error('Erro ao carregar dados do perfil! :(', error);
+            Alert.alert('Erro ao carregar dados do perfil! :(');
+        } finally {
+            setCarregando(false);
+        }
+    };
+
+    // Similar à tela do prestador, usamos o hook `useFocusEffect`
+    useFocusEffect(
+        useCallback(() => {
+            buscarDadosCliente();
+        }, [])
+    );
+
+    // Função para seleção e upload de imagem
+    const pickImage = async () => {
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+            Alert.alert('Permissão necessária', 'Precisamos de permissão para acessar sua galeria!');
+            return;
+        }
+
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            quality: 1,
+        });
+
+        if (!result.canceled) {
+            const newPhotoUri = result.assets[0].uri; // Nova URI da imagem
+            setFoto(newPhotoUri); // Atualiza o estado com a nova URI
+            await uploadImage(newPhotoUri); // Chama uploadImage com a nova URI
+        }
+    };
+
+    const uploadImage = async (newUri: string) => {
+        if (!newUri) {
+            Alert.alert('Erro', 'Nenhuma imagem selecionada.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', {
+            uri: newUri,
+            name: 'profile.jpg',
+            type: 'image/jpeg',
+        } as any);
+
+        try {
+            const response = await api.put('/clienteFoto', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${authData.authData?.token}`,
+                    email: authData.authData?.email,
+                },
+            });
+
+            console.log('Foto enviada com sucesso:', response.data);
+            Alert.alert('Sucesso', 'Foto atualizada com sucesso!');
+        } catch (error) {
+            Alert.alert('Erro', 'Falha ao enviar a foto.');
+        }
+    };
+
+    // Função para confirmar exclusão de perfil
+    const confirmDelete = async () => {
+        setModalVisible(false);
+        try {
+            await api.delete('/cliente', {
+                headers: {
+                    Authorization: `Bearer ${authData.authData?.token}`,
+                    email: authData.authData?.email,
+                },
+            });
+            console.log('Perfil deletado!');
+            Alert.alert('Perfil deletado com sucesso!');
+            authData.logOut();
+        } catch (error) {
+            Alert.alert('Erro', 'Falha ao excluir o perfil.');
+        }
+    };
 
     const handleDeletePress = () => {
         setModalVisible(true);
     };
 
-    const confirmDelete = () => {
-        setModalVisible(false);
-        console.log('Perfil deletado!');
-        Alert.alert('Perfil deletado com sucesso!');
-    };
-
-    const handleChangePhotoPress = () => {
-        Alert.alert('Funcionalidade de upload de imagem em desenvolvimento.');
-    };
-
     const handleEditPress = () => {
-        navigation.navigate('UpdateCliente');  // Navegue para a tela de edição
+        navigation.navigate('UpdateCliente');
     };
 
     return (
@@ -43,22 +143,17 @@ export function ProfileCliente() {
 
             {/* view das imagens */}
             <View style={styles.imageView}>
-                <Image 
-                    source={require('../../../assets/profileIcon.png')}
-                    style={styles.profile}
-                />
-                <TouchableOpacity onPress={handleChangePhotoPress}>
-                    <Text style={styles.editProfile}> 
-                        Alterar Foto
-                    </Text>
-                </TouchableOpacity>
+                {foto && <Image source={{ uri: foto }} style={styles.profile} />}
+                <Text style={styles.editProfile} onPress={pickImage}>
+                    Alterar Foto
+                </Text>
             </View>
 
             {/* view dos textos das informações */}
             <View style={styles.informations}>
                 <View style={styles.separator}>
                     <Text style={styles.textBold}> Nome:</Text>
-                    <Text style={styles.textInformation}> {nome} </Text>
+                    <Text style={styles.textInformation}> {name} </Text>
                 </View>
                 <View style={styles.separator}>
                     <Text style={styles.textBold}> Email:</Text>
@@ -82,7 +177,7 @@ export function ProfileCliente() {
             <View style={styles.buttons}>
                 <CustomButton
                     title="Editar"
-                    onPress={handleEditPress}  // Altere a função onPress para navegar
+                    onPress={handleEditPress}
                     color='#ffff'
                     textColor='#564CAF'
                     borderColor='#564CAF'
@@ -109,7 +204,9 @@ export function ProfileCliente() {
 }
 
 const separatorStyle: ViewStyle = {
-    height: 4, width: '100%', backgroundColor: 'black'
-}
+    height: 4,
+    width: '100%',
+    backgroundColor: 'black',
+};
 
-const Separator = () => <View style={separatorStyle} />
+const Separator = () => <View style={separatorStyle} />;

@@ -8,7 +8,7 @@ import { AuthProvider } from './src/contextS/Auth';
 export default function App() {
   const [fontsLoaded] = useFonts({
     Roboto_400Regular,
-    Roboto_700Bold
+    Roboto_700Bold,
   });
 
   if (!fontsLoaded) {
@@ -17,8 +17,13 @@ export default function App() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
+      {/* Configuração da StatusBar */}
+      <StatusBar 
+        barStyle="light-content" // Altera a cor dos ícones para claro
+        translucent={false} // Se falso, a StatusBar não será transparente
+      />
       <AuthProvider>
-      <Routes />
+        <Routes />
       </AuthProvider>
     </SafeAreaView>
   );
