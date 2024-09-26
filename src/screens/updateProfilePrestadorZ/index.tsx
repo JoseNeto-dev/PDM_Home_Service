@@ -20,7 +20,6 @@ export function UpdateProfilePrestador() {
             const prestador: PutPrestadorDTO = {
                 nome: name,
                 telefone: phone,
-                cnpj: cnpj,
                 horarioDisponibilidade: disponibilidade,
                 latitude: markerCoordinate.latitude,
                 longitude: markerCoordinate.longitude
@@ -38,13 +37,9 @@ export function UpdateProfilePrestador() {
 
             if (response.status === 200 || response.status === 201) {
                 setName('');
-                setPassword('');
-                setEmail('');
                 setPhone('');
                 setDisponibilidade('');
-                setCnpj('');
-
-                navigation.navigate("Login"); // Navega para a tela de login após sucesso
+                navigation.navigate("ProfilePrestador"); // Navega para a tela de login após sucesso
                 console.log('Prestador atualizado com sucesso!');
                 Alert.alert('Prestador atualizado com sucesso!');
             }
@@ -95,10 +90,7 @@ export function UpdateProfilePrestador() {
     }, []);
 
     const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [phone, setPhone] = useState('');
-    const [cnpj, setCnpj] = useState('');
     const [disponibilidade, setDisponibilidade] = useState('');
 
     return (
@@ -122,31 +114,10 @@ export function UpdateProfilePrestador() {
                     />
                     <TextInput
                         style={styles.input}
-                        placeholder='Email'
-                        placeholderTextColor='#9089CB'
-                        onChangeText={(text) => setEmail(text)}
-                        value={email}
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder='Senha'
-                        placeholderTextColor='#9089CB'
-                        onChangeText={(text) => setPassword(text)}
-                        value={password}
-                    />
-                    <TextInput
-                        style={styles.input}
                         placeholder='Telefone'
                         placeholderTextColor='#9089CB'
                         onChangeText={(text) => setPhone(text)}
                         value={phone}
-                    />
-                    <TextInput
-                        style={styles.input}
-                        placeholder='CNPJ       '
-                        placeholderTextColor='#9089CB'
-                        onChangeText={(text) => setCnpj(text)}
-                        value={cnpj}
                     />
                     <TextInput
                         style={styles.input}

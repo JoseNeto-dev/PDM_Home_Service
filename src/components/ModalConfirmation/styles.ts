@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     },
     modalContainer: {
         width: 360,
-        height: 143,
+        height: 190,
         padding: 10,
         borderWidth: 2,
         borderColor: globalTheme.COLORS.purple700,
